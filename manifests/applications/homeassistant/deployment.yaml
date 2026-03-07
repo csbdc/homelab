@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: homeassistant
+  name: homeassistant
+  namespace: homeassistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homeassistant
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: homeassistant
+    spec:
+      containers:
+      - image: ghcr.io/home-assistant/home-assistant:stable
+        name: home-assistant
+        env:
+          - name: TZ
+            value: Europe/London
+        ports:
+          - containerPort: 8123
+            name: http
+        resources: {}
+status: {}
