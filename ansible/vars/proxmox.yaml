@@ -1,0 +1,5 @@
+proxmox_cluster_name: "pve-cluster"
+proxmox_validate_certs: false
+proxmox_api_user: "{{ vault_proxmox_api_user }}"
+proxmox_api_password: "{{ vault_proxmox_api_password }}"
+proxmox_terraform_password: "{{ vault_proxmox_terraform_password }}"

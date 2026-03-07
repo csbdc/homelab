@@ -1,0 +1,10 @@
+terraform.tfstate
+terraform.tfstate.backup
+talos_patches.yaml
+terraform.tfvars
+.terraform.lock.hcl
+.terraform/
+vault.yaml
+unifi-UK-721.conf
+.vscode/
+.DS_Store

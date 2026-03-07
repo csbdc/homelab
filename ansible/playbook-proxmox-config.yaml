@@ -1,0 +1,71 @@
+---
+- name: Setup proxmox hosts
+  hosts: pve
+  gather_facts: false
+  connection: local
+  vars_files:
+    - vault.yaml
+    - proxmox.yaml
+  tasks:
+    - name: Configure a Proxmox VE Cluster
+      when: inventory_hostname == "pve-1fdq713"
+      block:
+        - name: Configure Primary Node
+          community.proxmox.proxmox_cluster:
+            state: present
+            api_host: "{{ ansible_host }}"
+            api_user: "{{ proxmox_api_user }}"
+            api_password: "{{ proxmox_api_password }}"
+            link0: "{{ ansible_host }}"
+            cluster_name: "{{ proxmox_cluster_name }}"
+        - name: List Proxmox VE cluster join information
+          register: proxmox_cluster_join
+          community.proxmox.proxmox_cluster_join_info:
+            api_host: "{{ ansible_host }}"
+            api_user: "{{ proxmox_api_user }}"
+            api_password: "{{ proxmox_api_password }}"
+        - name: Create new Proxmox VE user group
+          community.proxmox.proxmox_group:
+            api_host: "{{ ansible_host }}"
+            api_user: "{{ proxmox_api_user }}"
+            api_password: "{{ proxmox_api_password }}"
+            name: admins
+        - name: Create Terraform api_user
+          community.proxmox.proxmox_user:
+            api_host: "{{ ansible_host }}"
+            api_user: "{{ proxmox_api_user }}"
+            api_password: "{{ proxmox_api_password }}"
+            name: terraform@pve
+            enable: true
+            groups:
+              - admins
+            password: "{{ proxmox_terraform_password }}"
+        - name: Create ACE
+          community.proxmox.proxmox_access_acl:
+            api_host: "{{ ansible_host }}"
+            api_user: "{{ proxmox_api_user }}"
+            api_password: "{{ proxmox_api_password }}"
+            state: "present"
+            path: /
+            type: group
+            ugid: "admins"
+            roleid: Administrator
+            propagate: 1
+
+    - name: Join nodes to Cluster
+      when: inventory_hostname != "pve-1fdq713"
+      block:
+        - name: Join a Proxmox VE Cluster
+          community.proxmox.proxmox_cluster:
+            state: present
+            api_host: "{{ ansible_host }}"
+            api_user: "{{ proxmox_api_user }}"
+            api_password: "{{ proxmox_api_password }}"
+            master_ip: "{{ hostvars['pve-1fdq713'].proxmox_cluster_join.cluster_join.nodelist[0].pve_addr }}"
+            cluster_name: "{{ proxmox_cluster_name }}"
+            fingerprint: "{{ hostvars['pve-1fdq713'].proxmox_cluster_join.cluster_join.nodelist[0].pve_fp }}"
+          register: joined_status 
+          when: inventory_hostname != "pve-1fdq713"
+        - name: Checking node join status
+          debug:
+            msg: "{{ joined_status.msg }}"
