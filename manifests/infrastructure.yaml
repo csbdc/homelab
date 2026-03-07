@@ -66,37 +66,37 @@ spec:
   path: ./manifests/infrastructure/loadbalancer/config
   prune: true
   wait: true
-# ---
-# apiVersion: kustomize.toolkit.fluxcd.io/v1
-# kind: Kustomization
-# metadata:
-#   name: infra-controllers
-#   namespace: default
-# spec:
-#   dependsOn:
-#     - name: loadbalancer-config
-#   interval: 1m
-#   timeout: 5m
-#   sourceRef:
-#     kind: GitRepository
-#     name: flux-system
-#     namespace: flux-system
-#   path: ./flux/infrastructure/controllers
-#   prune: true
-# ---
-# apiVersion: kustomize.toolkit.fluxcd.io/v1
-# kind: Kustomization
-# metadata:
-#   name: infra-configs
-#   namespace: default
-# spec:
-#   dependsOn:
-#     - name: infra-controllers
-#   interval: 1m
-#   timeout: 5m
-#   sourceRef:
-#     kind: GitRepository
-#     name: flux-system
-#     namespace: flux-system
-#   path: ./flux/infrastructure/configs
-#   prune: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: infra-controllers
+  namespace: default
+spec:
+  dependsOn:
+    - name: loadbalancer-config
+  interval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  path: ./manifests/infrastructure/controllers
+  prune: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: infra-configs
+  namespace: default
+spec:
+  dependsOn:
+    - name: infra-controllers
+  interval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  path: ./manifests/infrastructure/configs
+  prune: true
