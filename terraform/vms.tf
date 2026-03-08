@@ -10,7 +10,7 @@ module "talos_vms" {
   import_image_filename = "talos.qcow2"
 
   cores  = 4
-  memory = 4096
+  memory = 8192
 }
 
 locals {

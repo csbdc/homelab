@@ -25,5 +25,16 @@ spec:
         ports:
           - containerPort: 8123
             name: http
+            protocol: TCP
+          - containerPort: 4357
+            protocol: TCP
+          - containerPort: 51827
+            protocol: TCP
+          - containerPort: 1900
+            protocol: UDP
+          - containerPort: 5353
+            protocol: UDP
+          - containerPort: 5683
+            protocol: UDP      
         resources: {}
 status: {}

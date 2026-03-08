@@ -40,6 +40,7 @@ resource "proxmox_virtual_environment_vm" "vm" {
     datastore_id = "local-lvm"
     import_from  = proxmox_virtual_environment_download_file.img.id
     interface    = "scsi0"
+    size = 20
   }
 }
 
