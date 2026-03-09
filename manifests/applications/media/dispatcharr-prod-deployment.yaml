@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dispatcharr
+  name: dispatcharr-prod-media-deployment
+  namespace: media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dispatcharr
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: dispatcharr
+    spec:
+      containers:
+      - image: ghcr.io/dispatcharr/dispatcharr:latest
+        name: dispatcharr
+        envFrom:
+        - configMapRef:
+            name: dispatcharr-prod-media-config
+        ports:
+          - containerPort: 9191
+            name: http
+            protocol: TCP
+        resources: {}
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: dispatcharr-prod-media-pvc

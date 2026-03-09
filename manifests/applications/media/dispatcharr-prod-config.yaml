@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dispatcharr-prod-media-config
+  namespace: media
+data:
+  DISPATCHARR_ENV: aio
+  REDIS_HOST: localhost
+  CELERY_BROKER_URL: redis://localhost:6379/0
+  DISPATCHARR_LOG_LEVEL: info
