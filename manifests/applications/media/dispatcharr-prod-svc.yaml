@@ -5,7 +5,7 @@ metadata:
   namespace: media
 spec:
   selector:
-      app: media
+    app: dispatcharr
   ports:
     - port: 9191
       targetPort: http
