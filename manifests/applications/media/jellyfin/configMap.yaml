@@ -4,4 +4,4 @@ metadata:
   name: jellyfin-prod-media-config
   namespace: media
 data:
-  JELLYFIN_PublishedServerUrl=http://jellyfin.cbxon.co.uk
+  JELLYFIN_PublishedServerUrl: http://jellyfin.cbxon.co.uk
