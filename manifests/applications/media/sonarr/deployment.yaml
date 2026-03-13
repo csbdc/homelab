@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sonarr
+  name: sonarr-prod-media-deployment
+  namespace: media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarr
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: sonarr
+    spec:
+      containers:
+      - image: docker.io/sonarr/jellyfin
+        name: sonarr
+        ports:
+          - containerPort: 8096
+            name: http
+            protocol: TCP
+        resources: {}
+        volumeMounts:
+        - name: data
+          mountPath: /config
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: sonarr-prod-media-pvc

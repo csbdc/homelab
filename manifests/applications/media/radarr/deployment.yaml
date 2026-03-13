@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: radarr
+  name: radarr-prod-media-deployment
+  namespace: media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: radarr
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: radarr
+    spec:
+      containers:
+      - image: docker.io/radarr/jellyfin
+        name: radarr
+        ports:
+          - containerPort: 8096
+            name: http
+            protocol: TCP
+        resources: {}
+        volumeMounts:
+        - name: data
+          mountPath: /config
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: radarr-prod-media-pvc

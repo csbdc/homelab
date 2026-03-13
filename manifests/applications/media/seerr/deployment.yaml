@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: seerr
+  name: seerr-prod-media-deployment
+  namespace: media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: seerr
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: seerr
+    spec:
+      containers:
+      - image: docker.io/seerr/jellyfin
+        name: seerr
+        ports:
+          - containerPort: 8096
+            name: http
+            protocol: TCP
+        resources: {}
+        volumeMounts:
+        - name: data
+          mountPath: /config
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: seerr-prod-media-pvc
