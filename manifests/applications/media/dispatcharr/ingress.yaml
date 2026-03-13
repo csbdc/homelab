@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dispatcharr-prod-media-ingress
+spec:
+  rules:
+  - host: "dispatcharr.cbxon.local"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: dispatcharr-prod-media-svc
+            port:
+              number: 9191
