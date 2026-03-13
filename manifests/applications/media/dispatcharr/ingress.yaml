@@ -4,6 +4,7 @@ metadata:
   name: dispatcharr-prod-media-ingress
   namespace: media
 spec:
+  ingressClassName: nginx
   rules:
   - host: "dispatcharr.cbxon.local"
     http:
