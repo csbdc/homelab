@@ -7,7 +7,7 @@ spec:
   selector:
     app: sonarr
   ports:
-    - port: 8096
+    - port: 8989
       targetPort: http
       name: http
       protocol: TCP

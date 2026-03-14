@@ -4,6 +4,7 @@ metadata:
   name: kustomizations
 resources:
   - namespace.yaml
+  - persistentVolumeClaim.yaml
   - dispatcharr
   - jellyfin
   - radarr

@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sonarr-prod-media-ingress
+  namespace: media
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: "sonarr.cbxon.local"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: sonarr-prod-media-svc
+            port:
+              number: 8989
