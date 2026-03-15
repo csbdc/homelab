@@ -1,18 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: qbittorrent-prod-ingest-ingress
+  name: prowlarr-prod-ingest-ingress
   namespace: ingest
 spec:
   ingressClassName: nginx
   rules:
-  - host: "qbittorrent.cbxon.local"
+  - host: "prowlarr.cbxon.local"
     http:
       paths:
       - pathType: Prefix
         path: /
         backend:
           service:
-            name: qbittorrent-prod-ingest-svc
+            name: prowlarr-prod-ingest-svc
             port:
-              number: 8080
+              number: 9696
