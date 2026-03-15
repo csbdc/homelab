@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: qbittorrent
+  name: qbittorrent-prod-media-deployment
+  namespace: ingest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qbittorrent
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: qbittorrent
+    spec:
+      containers:
+      - image: docker.io/linuxserver/qbittorrent
+        name: qbittorrent
+        ports:
+          - containerPort: 8080
+            name: http
+            protocol: TCP
+          - containerPort: 6881
+            protocol: TCP
+          - containerPort: 6881
+            protocol: UDP
+        resources: {}
+        volumeMounts:
+        - name: data
+          mountPath: /config
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: qbittorrent-prod-media-pvc
