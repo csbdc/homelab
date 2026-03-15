@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jellyfin-prod-media-ingress
+  namespace: media
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: "jellyfin.cbxon.local"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: jellyfin-prod-media-svc
+            port:
+              number: 8096

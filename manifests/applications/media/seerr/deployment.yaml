@@ -20,7 +20,7 @@ spec:
       - image: ghcr.io/seerr-team/seerr
         name: seerr
         ports:
-          - containerPort: 8096
+          - containerPort: 5055
             name: http
             protocol: TCP
         resources: {}

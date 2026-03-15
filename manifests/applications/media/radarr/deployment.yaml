@@ -20,7 +20,7 @@ spec:
       - image: docker.io/linuxserver/radarr
         name: radarr
         ports:
-          - containerPort: 8096
+          - containerPort: 7878
             name: http
             protocol: TCP
         resources: {}

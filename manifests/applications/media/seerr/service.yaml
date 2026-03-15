@@ -7,7 +7,7 @@ spec:
   selector:
     app: seerr
   ports:
-    - port: 8096
+    - port: 5055
       targetPort: http
       name: http
       protocol: TCP
