@@ -20,7 +20,7 @@ spec:
       - image: docker.io/linuxserver/prowlarr
         name: prowlarr
         ports:
-          - containerPort: 8989
+          - containerPort: 9696
             name: http
             protocol: TCP
         resources: {}
