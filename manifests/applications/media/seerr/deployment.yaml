@@ -15,7 +15,9 @@ spec:
     metadata:
       labels:
         app: seerr
-    spec:
+    spec:  
+      securityContext:
+        fsGroup: 1000
       containers:
       - image: ghcr.io/seerr-team/seerr
         name: seerr
