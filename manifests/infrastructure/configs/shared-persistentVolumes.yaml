@@ -7,3 +7,5 @@ spec:
   - ReadWriteMany
   capacity:
     storage: 5Gi
+  storageClassName: longhorn
+  volumeMode: Filesystem
