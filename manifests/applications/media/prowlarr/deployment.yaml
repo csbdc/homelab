@@ -3,8 +3,8 @@ kind: Deployment
 metadata:
   labels:
     app: prowlarr
-  name: prowlarr-prod-ingest-deployment
-  namespace: ingest
+  name: prowlarr-prod-media-deployment
+  namespace: media
 spec:
   replicas: 1
   selector:
@@ -30,4 +30,4 @@ spec:
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: prowlarr-prod-ingest-pvc
+          claimName: prowlarr-prod-media-pvc

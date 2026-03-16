@@ -3,8 +3,8 @@ kind: Deployment
 metadata:
   labels:
     app: qbittorrent
-  name: qbittorrent-prod-ingest-deployment
-  namespace: ingest
+  name: qbittorrent-prod-media-deployment
+  namespace: media
 spec:
   replicas: 1
   selector:
@@ -36,7 +36,7 @@ spec:
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: qbittorrent-prod-ingest-pvc
+          claimName: qbittorrent-prod-media-pvc
       - name: downloads
         persistentVolumeClaim:
-          claimName: ingest-prod-ingest-pvc
+          claimName: ingest-prod-media-pvc

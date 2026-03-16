@@ -10,3 +10,5 @@ resources:
   - radarr
   - seerr
   - sonarr
+  - qbittorrent
+  - prowlarr

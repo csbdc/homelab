@@ -1,8 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: qbittorrent-prod-ingest-ingress
-  namespace: ingest
+  name: qbittorrent-prod-media-ingress
+  namespace: media
 spec:
   ingressClassName: nginx
   rules:
@@ -13,6 +13,6 @@ spec:
         path: /
         backend:
           service:
-            name: qbittorrent-prod-ingest-svc
+            name: qbittorrent-prod-media-svc
             port:
               number: 8080
