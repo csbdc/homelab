@@ -7,7 +7,6 @@ spec:
   accessModes:
   - ReadWriteMany
   storageClassName: longhorn
-  volumeName: nfs-prod-data-pv
   resources:
     requests:
       storage: 10Gi
