@@ -6,4 +6,3 @@ resources:
   - secret-cloner-sa.yaml
   - cert-manager-clone-secret.yaml
   - cluster-issuer.yaml
-  - multiple-namespaced-volume.yaml
