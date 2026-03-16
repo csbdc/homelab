@@ -18,7 +18,7 @@ metadata:
   namespace: longhorn-system
 spec:
   selector:
-    app: longhorn-share-manager-fs-prod-data-svcc
+    longhorn.io/component: share-manager
   ports:
     - protocol: TCP
       port: 2049
