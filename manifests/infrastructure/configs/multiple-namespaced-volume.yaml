@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-prod-data-pvc
+  namespace: longhorn-system
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: longhorn
+  volumeName: nfs-prod-data-pv
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fs-prod-data-svc
+  namespace: longhorn-system
+spec:
+  selector:
+    app: longhorn-share-manager-fs-prod-data-svcc
+  ports:
+    - protocol: TCP
+      port: 2049
