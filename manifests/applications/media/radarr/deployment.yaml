@@ -25,9 +25,20 @@ spec:
             protocol: TCP
         resources: {}
         volumeMounts:
-        - name: data
+        - name: app-data
           mountPath: /config
+        - name: media-data
+          mountPath: /data
+        - name: ingest-data
+          mountPath: /downloads
       volumes:
-      - name: data
+      - name: app-data
         persistentVolumeClaim:
           claimName: radarr-prod-media-pvc
+      - name: media-data
+        persistentVolumeClaim:
+          claimName: media-prod-media-pvc
+      - name: ingest-data
+        persistentVolumeClaim:
+          claimName: ingest-prod-media-pvc
+

@@ -6,3 +6,4 @@ resources:
   - secret-cloner-sa.yaml
   - cert-manager-clone-secret.yaml
   - cluster-issuer.yaml
+  - shared-persistentVolumes.yaml

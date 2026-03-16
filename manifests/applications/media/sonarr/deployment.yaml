@@ -29,6 +29,8 @@ spec:
           mountPath: /config
         - name: media-data
           mountPath: /data
+        - name: ingest-data
+          mountPath: /downloads
       volumes:
       - name: app-data
         persistentVolumeClaim:
@@ -36,3 +38,6 @@ spec:
       - name: media-data
         persistentVolumeClaim:
           claimName: media-prod-media-pvc
+      - name: ingest-data
+        persistentVolumeClaim:
+          claimName: ingest-prod-media-pvc
