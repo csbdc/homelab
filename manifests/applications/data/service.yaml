@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fs-prod-data-svc
+  namespace: storage
+spec:
+  selector:
+    app: longhorn-share-manager-fs-prod-data-svcc
+  ports:
+    - protocol: TCP
+      port: 2049
