@@ -12,3 +12,4 @@ spec:
   csi:
     driver: driver.longhorn.io
     fsType: ext4
+    volumeHandle: "shared-ingest-media"
