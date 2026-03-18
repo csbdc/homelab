@@ -23,7 +23,7 @@ metadata:
   name: jellyfin-prod-media-ingress-https
   namespace: media
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: cert-cluster-issuer
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   ingressClassName: nginx
