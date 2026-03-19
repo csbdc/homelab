@@ -17,7 +17,7 @@ spec:
         app: rpp
     spec:
       containers:
-      - image: ghcr.io/alexemanuelol/rustplusplus
+      - image: gghcr.io/alexemanuelol/rustplusplus:master
         name: rpp
         resources: {}
         env:
