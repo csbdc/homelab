@@ -40,4 +40,4 @@ spec:
           claimName: jellyfin-prod-media-pvc
       - name: media-data
         persistentVolumeClaim:
-          claimName: media-prod-media-pvc
+          claimName: libary-prod-media-pvc
