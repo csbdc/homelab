@@ -1,0 +1,36 @@
+---
+- name: Install BIND
+  community.general.apk:
+    name: bind
+    state: present
+
+- name: Create the zones directory for BIND
+  ansible.builtin.file:
+    path: "/var/bind/zones"
+    state: directory
+    mode: "0755"
+
+- name: Copy config files
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "0644"
+  loop:
+    - { src: "{{ role_path }}/files/named.conf", dest: "/etc/bind/named.conf" }
+    - { src: "{{ role_path }}/files/db.cbxon.co.uk", dest: "/var/bind/zones/db.cbxon.co.uk" }
+    - { src: "{{ role_path }}/files/db.cbxon.local", dest: "/var/bind/zones/db.cbxon.local" }
+
+- name: Set correct file permissions for zone files
+  ansible.builtin.file:
+    path: "{{ item }}"
+    mode: "0644"
+  loop:
+    - "/etc/bind/named.conf"
+    - "/var/bind/zones/db.cbxon.co.uk"
+    - "/var/bind/zones/db.cbxon.local"
+
+- name: Restart BIND service
+  ansible.builtin.service:
+    name: named
+    state: restarted
+    enabled: true

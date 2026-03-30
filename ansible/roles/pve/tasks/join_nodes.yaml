@@ -1,0 +1,15 @@
+---
+- name: Join a Proxmox VE Cluster
+  community.proxmox.proxmox_cluster:
+    state: present
+    api_host: "{{ ansible_host }}"
+    api_user: "{{ pve_api_user }}"
+    api_password: "{{ pve_api_password }}"
+    master_ip: "{{ hostvars['pve-1fdq713'].pve_cluster_join.cluster_join.nodelist[0].pve_addr }}"
+    cluster_name: "{{ pve_cluster_name }}"
+    fingerprint: "{{ hostvars['pve-1fdq713'].pve_cluster_join.cluster_join.nodelist[0].pve_fp }}"
+  register: pve_joined_status
+
+- name: Checking node join status
+  ansible.builtin.debug:
+    msg: "{{ pve_joined_status.msg }}"

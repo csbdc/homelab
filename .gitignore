@@ -6,5 +6,9 @@ terraform.tfvars
 .terraform/
 vault.yaml
 unifi-UK-721.conf
-.vscode/
+
+#####
+.ansible
+.venv
+.vscode
 .DS_Store

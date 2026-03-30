@@ -1,0 +1,50 @@
+---
+- name: Configure Primary Node
+  community.proxmox.proxmox_cluster:
+    state: present
+    api_host: "{{ ansible_host }}"
+    api_user: "{{ pve_api_user }}"
+    api_password: "{{ pve_api_password }}"
+    link0: "{{ ansible_host }}"
+    cluster_name: "{{ pve_cluster_name }}"
+
+- name: List Proxmox VE cluster join information
+  register: pve_cluster_join
+  community.proxmox.proxmox_cluster_join_info:
+    api_host: "{{ ansible_host }}"
+    api_user: "{{ pve_api_user }}"
+    api_password: "{{ pve_api_password }}"
+
+- name: Create new Proxmox VE user group
+  community.proxmox.proxmox_group:
+    api_host: "{{ ansible_host }}"
+    api_user: "{{ pve_api_user }}"
+    api_password: "{{ pve_api_password }}"
+    name: admins
+
+- name: Create Terraform api_user
+  community.proxmox.proxmox_user:
+    api_host: "{{ ansible_host }}"
+    api_user: "{{ pve_api_user }}"
+    api_password: "{{ pve_api_password }}"
+    name: terraform@pve
+    enable: true
+    groups:
+      - admins
+    password: "{{ pve_terraform_password }}"
+
+- name: Create ACE
+  community.proxmox.proxmox_access_acl:
+    api_host: "{{ ansible_host }}"
+    api_user: "{{ pve_api_user }}"
+    api_password: "{{ pve_api_password }}"
+    state: "present"
+    path: /
+    type: group
+    ugid: "admins"
+    roleid: Administrator
+    propagate: 1
+
+- name: Set proxmox_fp based on the current host
+  ansible.builtin.set_fact:
+    pve_fp: "{{ hostvars[inventory_hostname].pve_cluster_join.cluster_join.nodelist[0].pve_fp }}"

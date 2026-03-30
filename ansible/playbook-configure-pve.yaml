@@ -1,0 +1,19 @@
+---
+- name: Configure PVE Cluster
+  hosts: pve
+  gather_facts: false
+  connection: local
+  vars_files:
+    - vault.yaml
+  tasks:
+    - name: Create PVE Cluster
+      ansible.builtin.include_role:
+        name: pve
+        tasks_from: create_cluster.yaml
+      when: inventory_hostname == "pve-1fdq713"
+
+    - name: Join nodes to Cluster
+      ansible.builtin.include_role:
+        name: pve
+        tasks_from: join_nodes.yaml
+      when: inventory_hostname != "pve-1fdq713"

@@ -1,0 +1,11 @@
+$TTL    86400
+@       IN      SOA     ns1.cbxon.local. admin.cbxon.local. (
+                            2026030101 ; Serial
+                            3600       ; Refresh
+                            1800       ; Retry
+                            1209600    ; Expire
+                            86400 )    ; Minimum TTL
+
+ns1     IN      A       192.168.10.247
+@       IN      NS      ns1.cbxon.local.
+@       IN      A       192.168.10.247

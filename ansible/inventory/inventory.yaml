@@ -1,20 +1,16 @@
 all:
   children:
-    core:
-      hosts:
-        csb-dm-01:
-          ansible_host: 192.168.0.240
     pve:
       hosts:
-        # pve-j0zk2w2:
-        #   ansible_host: 192.168.0.240
+        pve-j0zk2w2: 
+          ansible_host: 192.168.10.240
         pve-1fdq713:
-          ansible_host: 192.168.0.241
+          ansible_host: 192.168.10.241
         pve-dh16933:
-          ansible_host: 192.168.0.242
-        wyse-4kty903:
-          ansible_host: 192.168.0.245
+          ansible_host: 192.168.10.242
+        # wyse-4kty903:
+        #   ansible_host: 192.168.10.245
     dns:
       hosts:
         ns1:
-          ansible_host: 192.168.0.87
+          ansible_host: 192.168.10.247

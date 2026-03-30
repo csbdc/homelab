@@ -1,0 +1,6 @@
+---
+- name: Configure DNS Servers
+  hosts: dns
+  gather_facts: false
+  roles:
+    - dns
