@@ -4,6 +4,7 @@ metadata:
   name: external-dns
   namespace: default
 spec:
+  suspend: true
   install:
     createNamespace: true
   targetNamespace: external-dns

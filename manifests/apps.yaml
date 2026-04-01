@@ -12,7 +12,8 @@ spec:
     name: homelab-github-flux-sync
     namespace: flux-system
   path: ./manifests/applications/media
-  prune: false
+  prune: true
+  suspend: true
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
