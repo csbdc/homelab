@@ -32,12 +32,19 @@ spec:
         volumeMounts:
         - name: app-data
           mountPath: /config
-        - name: media-data
-          mountPath: /media
+        - name: tv-data
+          mountPath: /tv
+        - name: movies-data
+          mountPath: /movies
       volumes:
       - name: app-data
         persistentVolumeClaim:
           claimName: jellyfin-prod-media-pvc
-      - name: media-data
-        persistentVolumeClaim:
-          claimName: libary-prod-media-pvc
+      - name: tv-data
+        nfs:
+          server: 192.168.10.197
+          path: /srv/nfs/tv
+      - name: movies-data
+        nfs:
+          server: 192.168.10.197
+          path: /srv/nfs/movies

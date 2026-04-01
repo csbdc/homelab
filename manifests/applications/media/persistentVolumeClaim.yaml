@@ -1,24 +1,3 @@
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: longhorn-hdd
-provisioner: driver.longhorn.io
-parameters:
-  numberOfReplicas: "3"
-  diskSelector: "slow" 
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: libary-prod-media-pvc
-  namespace: media
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: longhorn-hdd
-  resources:
-    requests:
-      storage: 100Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -31,4 +10,4 @@ spec:
   storageClassName: longhorn
   resources:
     requests:
-      storage: 20Gi
+      storage: 40Gi

@@ -28,7 +28,7 @@ spec:
         - name: app-data
           mountPath: /config
         - name: media-data
-          mountPath: /data
+          mountPath: /movies
         - name: ingest-data
           mountPath: /downloads
       volumes:
@@ -36,8 +36,9 @@ spec:
         persistentVolumeClaim:
           claimName: radarr-prod-media-pvc
       - name: media-data
-        persistentVolumeClaim:
-          claimName: libary-prod-media-pvc
+        nfs:
+          server: 192.168.10.197
+          path: /srv/nfs/movies
       - name: ingest-data
         persistentVolumeClaim:
           claimName: ingest-prod-media-pvc
