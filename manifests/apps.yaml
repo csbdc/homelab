@@ -9,10 +9,10 @@ spec:
   timeout: 5m
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: homelab-github-flux-sync
     namespace: flux-system
   path: ./manifests/applications/media
-  prune: true
+  prune: false
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -24,7 +24,7 @@ spec:
   timeout: 5m
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: homelab-github-flux-sync
     namespace: flux-system
   path: ./manifests/applications/rust
   prune: true

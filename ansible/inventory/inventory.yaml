@@ -12,5 +12,13 @@ all:
         #   ansible_host: 192.168.10.245
     dns:
       hosts:
+        # ns1:
+        #   ansible_host: 192.168.10.247
         ns1:
-          ansible_host: 192.168.10.247
+          ansible_host: 192.168.10.140
+        ns2:
+          ansible_host: 192.168.10.166
+    nfs:
+      hosts:
+        nfs:
+          ansible_host: 192.168.10.197

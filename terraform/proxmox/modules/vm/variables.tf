@@ -23,6 +23,8 @@ variable "vm_spec" {
       interface    = string
       size         = number
     }))
+    cloudinit   = optional(bool, false)
+    userdata_id = optional(string, null)
     cdrom = optional(object({
       file_id = optional(string, null)
     }), {})

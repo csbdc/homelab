@@ -1,8 +1,22 @@
 ---
+- name: PreConfigure PVE Cluster
+  hosts: pve
+  gather_facts: false
+  vars_files:
+    - vault.yaml
+  tasks:
+    - name: Add SSH key for current Ansible user
+      ansible.posix.authorized_key:
+        user: "{{ ansible_user }}"
+        key: "{{ lookup('file', '../id_ed25519.pub') }}"
+        state: present
+
 - name: Configure PVE Cluster
   hosts: pve
   gather_facts: false
   connection: local
+  vars:
+    ansible_python_interpreter: "{{ ansible_playbook_python }}"
   vars_files:
     - vault.yaml
   tasks:

@@ -15,3 +15,7 @@ variable "proxmox_password" {
   default  = ""
   nullable = false
 }
+
+variable "hashed_user_password" {
+  type = string
+}

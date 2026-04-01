@@ -45,7 +45,24 @@ resource "proxmox_virtual_environment_vm" "vm" {
     }
   }
 
-  cdrom {
-    file_id = var.vm_spec.cdrom.file_id
+  dynamic "initialization" {
+    for_each = var.vm_spec.cloudinit == true ? ["cloud-init"] : []
+    content {
+      ip_config {
+        ipv4 {
+          address = "dhcp"
+        }
+      }
+      interface = "ide2"
+
+      user_data_file_id = var.vm_spec.userdata_id != null ? var.vm_spec.userdata_id : null
+    }
+  }
+
+  dynamic "cdrom" {
+    for_each = var.vm_spec.cdrom.file_id != null ? ["use-cdrom"] : []
+    content {
+      file_id = var.vm_spec.cdrom.file_id
+    }
   }
 }

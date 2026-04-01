@@ -1,0 +1,7 @@
+# /etc/exports
+#
+# See exports(5) for a description.
+
+# use exportfs -arv to reread
+/srv/nfs/movies    192.168.10.0/24(rw,sync,no_subtree_check)
+/srv/nfs/tv    192.168.10.0/24(rw,sync,no_subtree_check)

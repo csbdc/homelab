@@ -8,7 +8,7 @@ spec:
   timeout: 5m
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: homelab-github-flux-sync
     namespace: flux-system
   path: ./manifests/infrastructure/helm-repos
   prune: true
@@ -24,7 +24,7 @@ spec:
   timeout: 5m
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: homelab-github-flux-sync
     namespace: flux-system
   path: ./manifests/infrastructure/namespaces
   prune: true
@@ -43,7 +43,7 @@ spec:
   timeout: 5m
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: homelab-github-flux-sync
     namespace: flux-system
   path: ./manifests/infrastructure/loadbalancer/controller
   prune: true
@@ -61,7 +61,7 @@ spec:
   timeout: 5m
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: homelab-github-flux-sync
     namespace: flux-system
   path: ./manifests/infrastructure/loadbalancer/config
   prune: true
@@ -79,7 +79,7 @@ spec:
   timeout: 5m
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: homelab-github-flux-sync
     namespace: flux-system
   path: ./manifests/infrastructure/controllers
   prune: true
@@ -90,13 +90,14 @@ metadata:
   name: infra-configs
   namespace: default
 spec:
+  suspend: true
   dependsOn:
     - name: infra-controllers
   interval: 1m
   timeout: 5m
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: homelab-github-flux-sync
     namespace: flux-system
   path: ./manifests/infrastructure/configs
   prune: true

@@ -7,6 +7,5 @@ resources:
   - cert-manager.yaml
   - ingress-nginx.yaml
   - external-dns.yaml
-  - external-secrets.yaml
   - longhorn.yaml
   - metrics-server.yaml

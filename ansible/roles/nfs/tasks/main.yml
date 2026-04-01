@@ -1,0 +1,70 @@
+---
+- name: Set hostname
+  ansible.builtin.hostname:
+    name: "{{ inventory_hostname }}"
+    use: alpine
+
+- name: Create the nfs mount directory
+  ansible.builtin.file:
+    path: /srv/nfs
+    state: directory
+    mode: "0755"
+    owner: nobody
+    group: nogroup
+
+- name: Ensure e2fsprogs is installed
+  community.general.apk:
+    name: e2fsprogs
+    state: present
+
+- name: MakeFS HDD
+  community.general.filesystem:
+    dev: /dev/sdb
+    fstype: ext4
+    state: present
+
+- name: Mount HDD
+  ansible.posix.mount:
+    path: /srv/nfs
+    src: /dev/sdb
+    fstype: ext4
+    opts: rw
+    state: present
+
+- name: Install NFS
+  community.general.apk:
+    name: nfs-utils
+    state: present
+
+- name: Create the nfs export directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+    owner: nobody
+    group: nogroup
+  loop: "{{ nfs_share_directories }}"
+
+- name: Copy config files
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "0644"
+  loop:
+    - { src: "{{ role_path }}/files/exports", dest: "/etc/exports" }
+
+- name: Restart RPCBIND service
+  ansible.builtin.service:
+    name: rpcbind
+    state: restarted
+    enabled: true
+
+- name: Restart NFS service
+  ansible.builtin.service:
+    name: nfs
+    state: restarted
+    enabled: true
+
+- name: Reboot Server
+  ansible.builtin.command:
+    cmd: reboot
