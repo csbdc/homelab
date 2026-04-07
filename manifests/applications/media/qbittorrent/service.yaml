@@ -4,6 +4,7 @@ metadata:
   name: qbittorrent-prod-media-svc
   namespace: media
 spec:
+  clusterIP: None
   selector:
     app: qbittorrent
   ports:

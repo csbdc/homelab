@@ -68,7 +68,7 @@ data:
     General\StatusbarExternalIPDisplayed=true
     MailNotification\req_auth=true
     WebUI\Address=*
-    WebUI\AuthSubnetWhitelist=10.96.0.0/18
+    WebUI\AuthSubnetWhitelist=10.244.0.0/16
     WebUI\AuthSubnetWhitelistEnabled=true
     WebUI\ServerDomains=*
 
