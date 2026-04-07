@@ -1,21 +1,57 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: qbittorrent-prod-media-svc
+  name: qbittorrent-prod-media-svc-0
   namespace: media
 spec:
   clusterIP: None
   selector:
-    app: qbittorrent
+    statefulset.kubernetes.io/pod-name: qbittorrent-prod-media-statefulset-0
   ports:
     - port: 8080
       targetPort: http
       name: http
       protocol: TCP
-    - port: 6881
-      targetPort: 6881
-      name: p2p
-    - port: 6881
-      targetPort: 6881
-      name: p2p-udp
-      protocol: UDP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qbittorrent-prod-media-svc-1
+  namespace: media
+spec:
+  clusterIP: None
+  selector:
+    statefulset.kubernetes.io/pod-name: qbittorrent-prod-media-statefulset-1
+  ports:
+    - port: 8080
+      targetPort: http
+      name: http
+      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qbittorrent-prod-media-svc-2
+  namespace: media
+spec:
+  clusterIP: None
+  selector:
+    statefulset.kubernetes.io/pod-name: qbittorrent-prod-media-statefulset-2
+  ports:
+    - port: 8080
+      targetPort: http
+      name: http
+      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qbittorrent-frontend-proxy-prod-media-svc
+  namespace: media
+spec:
+  selector:
+    app: qbittorrent-frontend-proxy-prod-media-deployment
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

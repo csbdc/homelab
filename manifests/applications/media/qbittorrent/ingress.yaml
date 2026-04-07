@@ -6,33 +6,33 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: "qbittorrent-prod-media-statefulset-0.qbittorrent.cbxon.local"
+  - host: "qbittorrent-0.qbittorrent.cbxon.local"
     http:
       paths:
       - pathType: Prefix
         path: /
         backend:
           service:
-            name: qbittorrent-prod-media-svc
+            name: qbittorrent-prod-media-svc-0
             port:
               number: 8080
-  - host: "qbittorrent-prod-media-statefulset-1.qbittorrent.cbxon.local"
+  - host: "qbittorrent-1.qbittorrent.cbxon.local"
     http:
       paths:
       - pathType: Prefix
         path: /
         backend:
           service:
-            name: qbittorrent-prod-media-svc
+            name: qbittorrent-prod-media-svc-1
             port:
               number: 8080
-  - host: "qbittorrent-prod-media-statefulset-2.qbittorrent.cbxon.local"
+  - host: "qbittorrent-2.qbittorrent.cbxon.local"
     http:
       paths:
       - pathType: Prefix
         path: /
         backend:
           service:
-            name: qbittorrent-prod-media-svc
+            name: qbittorrent-prod-media-svc-2
             port:
               number: 8080

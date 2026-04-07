@@ -13,8 +13,8 @@ jellyfin       IN  A    192.168.10.5
 sonarr         IN  A    192.168.10.5
 radarr         IN  A    192.168.10.5
 seerr          IN  A    192.168.10.5
-qbittorrent-1.qbittorrent    IN  A    192.168.10.5
-qbittorrent-2.qbittorrent    IN  A    192.168.10.5
-qbittorrent-3.qbittorrent    IN  A    192.168.10.5
 prowlarr       IN  A    192.168.10.5
 dispatcharr    IN  A    192.168.10.5
+qbittorrent-0    IN  A    192.168.10.5
+qbittorrent-1    IN  A    192.168.10.5
+qbittorrent-2    IN  A    192.168.10.5

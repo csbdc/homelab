@@ -75,3 +75,37 @@ data:
     [RSS]
     AutoDownloader\DownloadRepacks=true
     AutoDownloader\SmartEpisodeFilter=s(\\d+)e(\\d+), (\\d+)x(\\d+), "(\\d{4}[.\\-]\\d{1,2}[.\\-]\\d{1,2})", "(\\d{1,2}[.\\-]\\d{1,2}[.\\-]\\d{4})"
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: qbittorrent-frontend-proxy-prod-media-config
+  namespace: media
+data:
+  nginx.conf: |
+    events {}
+
+    http {
+        upstream backend {
+          server qbittorrent-prod-media-svc-0.media.svc:8080;
+          server qbittorrent-prod-media-svc-1.media.svc:8080;
+          server qbittorrent-prod-media-svc-2.media.svc:8080;
+        }
+        log_format detailed '$remote_addr - $remote_user [$time_local] '
+                            '"$request" $status $body_bytes_sent '
+                            '"$http_referer" "$http_user_agent"';
+
+        access_log /dev/stdout detailed;
+        error_log /dev/stderr debug;
+
+        server {
+            listen 8080;
+
+            location / {
+                proxy_pass http://backend;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+            }
+        }
+    }

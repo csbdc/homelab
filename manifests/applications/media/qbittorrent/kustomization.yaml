@@ -7,3 +7,4 @@ resources:
   - configMap.yaml
   - statefulSet.yaml
   - ingress.yaml
+  - deployment.yaml
