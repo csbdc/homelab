@@ -17,9 +17,6 @@ spec:
       labels:
         app: qbittorrent
     spec:
-      securityContext:
-        seccompProfile:
-          type: RuntimeDefault
       containers:
       - image: docker.io/linuxserver/qbittorrent
         name: qbittorrent
@@ -41,10 +38,6 @@ spec:
           subPath: qBittorrent.conf
         - name: downloads
           mountPath: /downloads
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities: 
-            drop: ["ALL"]
       volumes:
       - name: data
         configMap:
