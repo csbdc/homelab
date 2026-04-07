@@ -4,7 +4,6 @@ metadata:
   name: qbittorrent-prod-media-svc-0
   namespace: media
 spec:
-  clusterIP: None
   selector:
     statefulset.kubernetes.io/pod-name: qbittorrent-prod-media-statefulset-0
   ports:
@@ -19,7 +18,6 @@ metadata:
   name: qbittorrent-prod-media-svc-1
   namespace: media
 spec:
-  clusterIP: None
   selector:
     statefulset.kubernetes.io/pod-name: qbittorrent-prod-media-statefulset-1
   ports:
@@ -34,7 +32,6 @@ metadata:
   name: qbittorrent-prod-media-svc-2
   namespace: media
 spec:
-  clusterIP: None
   selector:
     statefulset.kubernetes.io/pod-name: qbittorrent-prod-media-statefulset-2
   ports:
