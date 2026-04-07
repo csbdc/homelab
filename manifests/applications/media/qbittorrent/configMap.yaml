@@ -62,7 +62,7 @@ data:
     [Preferences]
     Connection\PortRangeMin=6881
     Connection\UPnP=false
-    Downloads\SavePath=/downloads/
+    Downloads\SavePath=/complete/
     Downloads\TempPath=/downloads/incomplete/
     General\Locale=en
     General\StatusbarExternalIPDisplayed=true

@@ -29,7 +29,7 @@ spec:
           mountPath: /config
         - name: media-data
           mountPath: /movies
-        - name: ingest-data
+        - name: downloads
           mountPath: /downloads
       volumes:
       - name: app-data
@@ -39,7 +39,7 @@ spec:
         nfs:
           server: 192.168.10.197
           path: /srv/nfs/movies
-      - name: ingest-data
-        persistentVolumeClaim:
-          claimName: ingest-prod-media-pvc
-
+      - name: downloads
+        nfs:
+          server: 192.168.10.197
+          path: /srv/nfs/downloads

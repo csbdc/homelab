@@ -38,9 +38,15 @@ spec:
           subPath: qBittorrent.conf
         - name: downloads
           mountPath: /downloads
+        - name: complete
+          mountPath: /complete/          
       volumes:
       - name: data
         configMap:
           name: qbittorrent-prod-media-config
       - name: downloads
         emptyDir: {}
+      - name: complete
+        nfs:
+          server: 192.168.10.197
+          path: /srv/nfs/downloads

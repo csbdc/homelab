@@ -1,2 +1,2 @@
 ---
-nfs_share_directories: ["/srv/nfs/movies", "/srv/nfs/tv"]
+nfs_share_directories: ["/srv/nfs/movies", "/srv/nfs/tv", "/srv/nfs/downloads"]

@@ -5,3 +5,4 @@
 # use exportfs -arv to reread
 /srv/nfs/movies 192.168.10.0/24(rw,sync,no_subtree_check,all_squash,anonuid=911,anongid=911)
 /srv/nfs/tv     192.168.10.0/24(rw,sync,no_subtree_check,all_squash,anonuid=911,anongid=911)
+/srv/nfs/downloads     192.168.10.0/24(rw,sync,no_subtree_check,all_squash,anonuid=911,anongid=911)
