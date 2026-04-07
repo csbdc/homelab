@@ -3,7 +3,7 @@ kind: Kustomization
 metadata:
   name: kustomizations
 resources:
-  - persistentVolumeClaim.yaml
   - service.yaml
-  - deployment.yaml
+  - configMap.yaml
+  - statefulSet.yaml
   - ingress.yaml

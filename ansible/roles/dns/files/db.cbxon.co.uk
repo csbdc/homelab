@@ -9,3 +9,4 @@ $TTL    86400
 ns1     IN      A       192.168.10.247
 @       IN      NS      ns1.cbxon.co.uk.
 @       IN      A       192.168.10.247
+jellyfin    IN  A       192.168.10.5

@@ -43,7 +43,7 @@ module "workers" {
       datastore_id = "local-lvm"
       img          = proxmox_virtual_environment_download_file.talos_img[each.key].id
       interface    = "scsi0"
-      size         = 45
+      size         = 90
   }] }
 }
 

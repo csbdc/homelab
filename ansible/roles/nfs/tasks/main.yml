@@ -41,8 +41,9 @@
     path: "{{ item }}"
     state: directory
     mode: "0755"
-    owner: nobody
-    group: nogroup
+    owner: 911
+    group: 911
+    recurse: true
   loop: "{{ nfs_share_directories }}"
 
 - name: Copy config files
@@ -52,6 +53,12 @@
     mode: "0644"
   loop:
     - { src: "{{ role_path }}/files/exports", dest: "/etc/exports" }
+
+- name: Adding nfsuser
+  ansible.builtin.user:
+    name: nfsuser
+    uid: 911
+    state: present
 
 - name: Restart RPCBIND service
   ansible.builtin.service:
@@ -65,6 +72,6 @@
     state: restarted
     enabled: true
 
-- name: Reboot Server
-  ansible.builtin.command:
-    cmd: reboot
+# - name: Reboot Server
+#   ansible.builtin.command:
+#     cmd: reboot

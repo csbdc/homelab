@@ -1,9 +1,9 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   labels:
     app: qbittorrent
-  name: qbittorrent-prod-media-deployment
+  name: qbittorrent-prod-media-statefulset
   namespace: media
 spec:
   replicas: 1
@@ -33,13 +33,13 @@ spec:
             memory: 2048Mi
         volumeMounts:
         - name: data
-          mountPath: /config
+          mountPath: /config/qBittorrent/qBittorrent.conf
+          subPath: qBittorrent.conf
         - name: downloads
           mountPath: /downloads
       volumes:
       - name: data
-        persistentVolumeClaim:
-          claimName: qbittorrent-prod-media-pvc
+        configMap:
+          name: qbittorrent-prod-media-config
       - name: downloads
-        persistentVolumeClaim:
-          claimName: ingest-prod-media-pvc
+        emptyDir: {}
