@@ -6,6 +6,7 @@ metadata:
   name: qbittorrent-prod-media-statefulset
   namespace: media
 spec:
+  serviceName: "qbittorrent"
   replicas: 3
   selector:
     matchLabels:
