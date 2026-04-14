@@ -23,7 +23,7 @@ data:
     MergeTrackersEnabled=true
     Session\AddExtensionToIncompleteFiles=true
     Session\AddTorrentStopped=false
-    Session\DefaultSavePath=/downloads/
+    Session\DefaultSavePath=/complete/
     Session\DisableAutoTMMByDefault=false
     Session\ExcludedFileNames=
     Session\IncludeOverheadInLimits=true
