@@ -1,4 +1,7 @@
 name: scan with KICS and upload SARIF
+permissions:
+  security-events: write
+  contents: read
 
 on: push
 
@@ -15,6 +18,7 @@ jobs:
           path: 'terraform'
           output_path: results-dir
           ignore_on_exit: results
+          output_formats: 'sarif'
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v4.35.2
         with:
