@@ -1,0 +1,16 @@
+name: 'Static Application Security Testing on IaC'
+on: push
+jobs:
+  code-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: run kics Scan
+        uses: checkmarx/kics-github-action@v2.1.20
+        with:
+          path: 'terraform'
+          ignore_on_exit: results
+          output_path: myResults/
+      - name: display kics results
+        run: |
+          cat myResults/results.json
