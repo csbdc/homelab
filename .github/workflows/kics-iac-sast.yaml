@@ -15,7 +15,7 @@ jobs:
       - name: run kics Scan
         uses: checkmarx/kics-action@v2.1.20
         with:
-          path: 'terraform'
+          path: 'terraform,manifests,ansible'
           output_path: results-dir
           ignore_on_exit: results
           output_formats: 'sarif'
