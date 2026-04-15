@@ -7,22 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     name: kics-action
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-      - name: Mkdir results-dir
-        run: mkdir -p results-dir
-      - name: Run KICS Scan with SARIF result
-        uses: checkmarx/kics-github-action@v2.1.20
+      - uses: actions/checkout@v6.0.2
+      - run: mkdir -p results-dir
+      - name: run kics Scan
+        uses: checkmarx/kics-action@latest
         with:
-          path: 'terraform,manifests,ansible'
-          ignore_on_exit: results
+          path: 'terraform'
           output_path: results-dir
-          output_formats: 'json,sarif'
-      - name: Show results
-        run: |
-          cat results-dir/results.sarif
-          cat results-dir/results.json
       - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: results-dir/results.sarif
+
