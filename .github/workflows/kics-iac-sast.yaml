@@ -1,8 +1,6 @@
 name: scan with KICS and upload SARIF
 
-on:
-  pull_request:
-    branches: [master]
+on: push
 
 jobs:
   kics-job:
