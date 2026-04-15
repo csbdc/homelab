@@ -1,13 +1,30 @@
-name: 'Static Application Security Testing on IaC'
-on: push
+name: scan with KICS and upload SARIF
+
+on:
+  pull_request:
+    branches: [master]
+
 jobs:
-  code-analysis:
+  kics-job:
     runs-on: ubuntu-latest
+    name: kics-action
     steps:
-      - uses: actions/checkout@v3
-      - name: run kics Scan
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Mkdir results-dir
+        run: mkdir -p results-dir
+      - name: Run KICS Scan with SARIF result
         uses: checkmarx/kics-github-action@v2.1.20
         with:
           path: 'terraform,manifests,ansible'
           ignore_on_exit: results
-          output_path: myResults/
+          output_path: results-dir
+          output_formats: 'json,sarif'
+      - name: Show results
+        run: |
+          cat results-dir/results.sarif
+          cat results-dir/results.json
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: results-dir/results.sarif
