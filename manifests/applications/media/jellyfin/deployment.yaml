@@ -30,15 +30,16 @@ spec:
           - name: app-data
             mountPath: /config
         securityContext:
-          runAsUser: 1000
-          runAsGroup: 1000
-          runAsNonRoot: true
+          runAsUser: 0
+          runAsGroup: 0
+          runAsNonRoot: false
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: false
           seccompProfile:
             type: RuntimeDefault
           capabilities:
             drop: ["ALL"]
+            add: ["CHOWN", "FOWNER"] 
       containers:
       - securityContext:
           allowPrivilegeEscalation: false
