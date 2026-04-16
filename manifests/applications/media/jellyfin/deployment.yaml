@@ -19,6 +19,26 @@ spec:
         app: jellyfin
     spec:
       automountServiceAccountToken: false
+      initContainers:
+      - name: set-permissions
+        image: alpine:latest
+        command:
+          - "sh"
+          - "-c"
+          - "chown -R 1000:1000 /config && chmod -R 700 /config"
+        volumeMounts:
+          - name: app-data
+            mountPath: /config
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 1000
+          runAsNonRoot: true
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop: ["ALL"]
       containers:
       - securityContext:
           allowPrivilegeEscalation: false
