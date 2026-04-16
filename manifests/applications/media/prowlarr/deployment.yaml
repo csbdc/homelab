@@ -16,6 +16,7 @@ spec:
       labels:
         app: prowlarr
     spec:
+      automountServiceAccountToken: false
       containers:
       - image: docker.io/linuxserver/prowlarr
         name: prowlarr

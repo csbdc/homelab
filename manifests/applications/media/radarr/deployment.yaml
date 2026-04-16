@@ -16,6 +16,7 @@ spec:
       labels:
         app: radarr
     spec:
+      automountServiceAccountToken: false
       containers:
       - image: docker.io/linuxserver/radarr
         name: radarr

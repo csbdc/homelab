@@ -16,6 +16,7 @@ spec:
       labels:
         app: dispatcharr
     spec:
+      automountServiceAccountToken: false
       containers:
       - image: ghcr.io/dispatcharr/dispatcharr:latest
         name: dispatcharr

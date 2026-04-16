@@ -16,6 +16,7 @@ spec:
       labels:
         app: sonarr
     spec:
+      automountServiceAccountToken: false
       containers:
       - image: docker.io/linuxserver/sonarr
         name: sonarr
