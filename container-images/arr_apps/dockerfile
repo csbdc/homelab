@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y $packages\
     && addgroup --system $app && adduser --system --ingroup $app $app \
     && mkdir -p "/opt/$app" \
     && mkdir -p $config_directory \
-    && wget -O "$app.tar.gz" $dlpackage \
+    && wget -O "$app.tar.gz" "$dlpackage" \
     && tar -xvzf "$app.tar.gz"\
     && rm "$app.tar.gz" \
     && mv "${app^}"/* "/opt/$app/" \
