@@ -18,6 +18,8 @@ spec:
       labels:
         app: jellyfin
     spec:
+      securityContext:
+        fsGroup: 1000
       automountServiceAccountToken: false
       initContainers:
       - name: set-permissions
@@ -29,7 +31,8 @@ spec:
           # - "apk add -U libcap; capsh --print; chown -R 1000:1000 /config && chmod -R 700 /config"
         volumeMounts:
           - name: app-data
-            mountPath: /config
+            mountPath: /
+            readOnly: false
         securityContext:
           runAsUser: 0
           runAsGroup: 0
