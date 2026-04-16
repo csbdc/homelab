@@ -16,17 +16,18 @@ spec:
       labels:
         app: seerr
     spec:  
-      automountServiceAccountToken: false
       securityContext:
         fsGroup: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
+        seccompProfile:
+          type: RuntimeDefault
+        readOnlyRootFilesystem: true
+      automountServiceAccountToken: false
       containers:
       - securityContext:
           allowPrivilegeEscalation: false
-          runAsUser: 911
-          runAsNonRoot: true
-          readOnlyRootFilesystem: false
-          seccompProfile:
-            type: RuntimeDefault
           capabilities:
             drop: ["ALL"]
         image: ghcr.io/seerr-team/seerr

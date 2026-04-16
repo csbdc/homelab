@@ -39,16 +39,3 @@ spec:
       targetPort: http
       name: http
       protocol: TCP
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: qbittorrent-frontend-proxy-prod-media-svc
-  namespace: media
-spec:
-  selector:
-    app: qbittorrent-frontend-proxy-prod-media-deployment
-  ports:
-    - protocol: TCP
-      port: 8080
-      targetPort: 8080
