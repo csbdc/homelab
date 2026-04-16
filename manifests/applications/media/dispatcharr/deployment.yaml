@@ -18,7 +18,16 @@ spec:
     spec:
       automountServiceAccountToken: false
       containers:
-      - image: ghcr.io/dispatcharr/dispatcharr:latest
+      - securityContext:
+          allowPrivilegeEscalation: false
+          runAsUser: 911
+          runAsNonRoot: true
+          readOnlyRootFilesystem: true
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop: ["ALL"]
+        image: ghcr.io/dispatcharr/dispatcharr:latest
         name: dispatcharr
         envFrom:
         - configMapRef:

@@ -16,14 +16,23 @@ spec:
     spec:
       automountServiceAccountToken: false
       containers:
-        - name: nginx
-          image: nginx:latest
-          ports:
-            - containerPort: 8080
-          volumeMounts:
-            - name: nginx-config
-              mountPath: /etc/nginx/nginx.conf
-              subPath: nginx.conf
+      - securityContext:
+          allowPrivilegeEscalation: false
+          runAsUser: 911
+          runAsNonRoot: true
+          readOnlyRootFilesystem: true
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop: ["ALL"]
+        name: nginx
+        image: nginx:latest
+        ports:
+          - containerPort: 8080
+        volumeMounts:
+          - name: nginx-config
+            mountPath: /etc/nginx/nginx.conf
+            subPath: nginx.conf
       volumes:
         - name: nginx-config
           configMap:

@@ -20,7 +20,11 @@ spec:
     spec:
       automountServiceAccountToken: false
       containers:
-      - image: docker.io/jellyfin/jellyfin
+      - securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+        image: docker.io/jellyfin/jellyfin
         name: jellyfin
         envFrom:
         - configMapRef:

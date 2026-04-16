@@ -18,7 +18,16 @@ spec:
     spec:
       automountServiceAccountToken: false
       containers:
-      - image: docker.io/linuxserver/prowlarr
+      - securityContext:
+          allowPrivilegeEscalation: false
+          runAsUser: 911
+          runAsNonRoot: true
+          readOnlyRootFilesystem: true
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop: ["ALL"]
+        image: docker.io/linuxserver/prowlarr
         name: prowlarr
         ports:
           - containerPort: 9696

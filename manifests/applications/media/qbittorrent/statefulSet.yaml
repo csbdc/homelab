@@ -15,8 +15,18 @@ spec:
       labels:
         app: qbittorrent
     spec:
+      automountServiceAccountToken: false
       containers:
-      - image: docker.io/linuxserver/qbittorrent
+      - securityContext:
+          allowPrivilegeEscalation: false
+          runAsUser: 911
+          runAsNonRoot: true
+          readOnlyRootFilesystem: true
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop: ["ALL"]
+        image: docker.io/linuxserver/qbittorrent
         name: qbittorrent
         ports:
           - containerPort: 8080
