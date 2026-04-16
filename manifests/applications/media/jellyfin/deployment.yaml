@@ -24,7 +24,7 @@ spec:
           allowPrivilegeEscalation: false
           runAsUser: 911
           runAsNonRoot: true
-          readOnlyRootFilesystem: true
+          readOnlyRootFilesystem: false
           seccompProfile:
             type: RuntimeDefault
           capabilities:
