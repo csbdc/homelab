@@ -25,7 +25,8 @@ spec:
         command:
           - "sh"
           - "-c"
-          - "apk add -U libcap; capsh --print; chown -R 1000:1000 /config && chmod -R 700 /config"
+          - "tail -f /dev/null"
+          # - "apk add -U libcap; capsh --print; chown -R 1000:1000 /config && chmod -R 700 /config"
         volumeMounts:
           - name: app-data
             mountPath: /config
