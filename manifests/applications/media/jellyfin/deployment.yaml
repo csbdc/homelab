@@ -22,7 +22,8 @@ spec:
       containers:
       - securityContext:
           allowPrivilegeEscalation: false
-          runAsUser: 911
+          runAsUser: 1000
+          runAsGroup: 1000
           runAsNonRoot: true
           readOnlyRootFilesystem: false
           seccompProfile:
