@@ -25,7 +25,7 @@ spec:
         runAsUser: 1000
         seccompProfile:
           type: RuntimeDefault
-        readOnlyRootFilesystem: false
+        readOnlyRootFilesystem: true
       automountServiceAccountToken: false
       containers:
       - securityContext:
@@ -45,7 +45,6 @@ spec:
         volumeMounts:
         - name: app-data
           mountPath: /config
-          readOnly: false
         - name: tv-data
           mountPath: /tv
         - name: movies-data
@@ -58,7 +57,9 @@ spec:
         nfs:
           server: 192.168.10.197
           path: /srv/nfs/tv
+          readOnly: true
       - name: movies-data
         nfs:
           server: 192.168.10.197
           path: /srv/nfs/movies
+          readOnly: true
