@@ -43,6 +43,7 @@ spec:
         volumeMounts:
         - name: app-data
           mountPath: /config
+          readOnly: false
         - name: tv-data
           mountPath: /tv
         - name: movies-data
