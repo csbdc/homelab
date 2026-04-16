@@ -43,7 +43,7 @@ jobs:
           push: true
           build-args: |
             app=sonarr 
-            dlpackage="https://services.sonarr.tv/v1/download/main/latest?version=4&os=linux&arch=amd64"
+            dlpackage="https://services.sonarr.tv/v1/download/main/latest?version=4&os=linux&arch=x64"
             port=8989
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
