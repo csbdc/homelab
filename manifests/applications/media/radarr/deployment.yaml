@@ -30,7 +30,7 @@ spec:
           allowPrivilegeEscalation: false
           capabilities:
             drop: ["ALL"]
-        image: docker.io/linuxserver/radarr
+        image: ghcr.io/csbdc/radarr:main
         name: radarr
         env:
           - name: PGID

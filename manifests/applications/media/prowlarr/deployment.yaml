@@ -30,7 +30,7 @@ spec:
           allowPrivilegeEscalation: false
           capabilities:
             drop: ["ALL"]
-        image: docker.io/linuxserver/prowlarr
+        image: ghcr.io/csbdc/prowlarr:main
         name: prowlarr
         env:
           - name: PGID
