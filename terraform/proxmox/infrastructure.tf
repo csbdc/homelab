@@ -82,6 +82,7 @@ module "dns" {
 }
 
 output "dns_node_ips" {
+  description = "IP of DNS servers created."
   value = {
     for node in local.dns_pve_nodes : node => module.dns[node].ipv4_address
   }
@@ -110,6 +111,7 @@ module "nfs" {
 }
 
 output "nfs_node_ips" {
+  description = "IP of NFS server created."
   value = {
     for node in local.nfs_pve_nodes : node => module.nfs[node].ipv4_address
   }

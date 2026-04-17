@@ -79,6 +79,7 @@ module "talos" {
 }
 
 output "cluster_node_ips" {
+  description = "IPs of talos nodes."
   value = local.nodes
 }
 
