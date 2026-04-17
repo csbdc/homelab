@@ -42,7 +42,7 @@ spec:
           httpGet:
             path: /ping
             port: 8989
-          initialDelaySeconds: 3
+          initialDelaySeconds: 20
           periodSeconds: 3
         env:
           - name: PGID

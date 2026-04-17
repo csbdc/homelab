@@ -35,14 +35,14 @@ spec:
         livenessProbe:
           httpGet:
             path: /ping
-            port: 8989
+            port: 9696
           initialDelaySeconds: 3
           periodSeconds: 3
         readinessProbe:
           httpGet:
             path: /ping
-            port: 8989
-          initialDelaySeconds: 3
+            port: 9696
+          initialDelaySeconds: 20
           periodSeconds: 3
         env:
           - name: PGID
