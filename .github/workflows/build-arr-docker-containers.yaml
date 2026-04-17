@@ -16,7 +16,7 @@ jobs:
       matrix:
         include:
           - image_name: sonarr
-            dlpackage: https://github.com/Sonarr/Sonarr/releases/download/v4.0.17.2953/Sonarr.develop.4.0.17.2953.linux-x64.tar.gz
+            dlpackage: https://github.com/Sonarr/Sonarr/releases/download/v4.0.17.2952/Sonarr.main.4.0.17.2952.linux-x64.tar.gz
             port: 8989
 
           - image_name: radarr
