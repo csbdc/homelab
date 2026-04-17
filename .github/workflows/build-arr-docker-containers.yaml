@@ -10,15 +10,16 @@ on: workflow_dispatch
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: sonarr
+  DLPACKAGE: https://services.sonarr.tv/v1/download/main/latest?version=4&os=linux&arch=x86
+  PORT: 8989
+
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -42,12 +43,9 @@ jobs:
           context: container-images/arr_apps/
           push: true
           build-args: |
-            app=sonarr 
-            version=4
-            os=linux
-            arch=arm64
-            dlpackage="https://services.sonarr.tv/v1/download/main/latest?version=${version}&os=${os}&arch=${arch}"
-            port=8989
+            app=${{ env.IMAGE_NAME }}
+            dlpackage=${{ env.DLPACKAGE }}
+            port=${{ env.PORT }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
