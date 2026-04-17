@@ -37,6 +37,18 @@ spec:
             value: "1000"
           - name: PUID
             value: "1000"
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 8989
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /ping
+            port: 8989
+          initialDelaySeconds: 3
+          periodSeconds: 3
         ports:
           - containerPort: 7878
             name: http

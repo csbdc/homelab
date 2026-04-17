@@ -32,6 +32,18 @@ spec:
             drop: ["ALL"]
         image: ghcr.io/csbdc/prowlarr:main
         name: prowlarr
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 8989
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /ping
+            port: 8989
+          initialDelaySeconds: 3
+          periodSeconds: 3
         env:
           - name: PGID
             value: "1000"
