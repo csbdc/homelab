@@ -3,7 +3,11 @@ permissions:
   security-events: write
   contents: read
 
-on: [ pull_request, workflow_dispatch ]
+on:
+  pull_request:
+  push:
+    branches:
+      - main
 
 jobs:
   kics-job:
