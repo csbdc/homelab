@@ -15,7 +15,7 @@ jobs:
       - name: run kics Scan
         uses: checkmarx/kics-action@v2.1.20
         with:
-          path: 'terraform,manifests,ansible'
+          path: 'terraform,manifests,ansible,container-images'
           output_path: results-dir
           ignore_on_exit: results
           output_formats: 'sarif'
@@ -23,4 +23,3 @@ jobs:
         uses: github/codeql-action/upload-sarif@v4.35.2
         with:
           sarif_file: results-dir/results.sarif
-
