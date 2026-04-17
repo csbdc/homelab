@@ -11,8 +11,7 @@ spec:
     matchLabels:
       app: jellyfin
   strategy:
-    rollingUpdate: 
-      maxUnavailable: 1
+    type: Recreate
   template:
     metadata:
       labels:
@@ -41,7 +40,13 @@ spec:
           - containerPort: 8096
             name: http
             protocol: TCP
-        resources: {}
+        resources:
+          limits:
+            cpu: 2000m
+            memory: 2Gi
+          requests:
+            cpu: 500m
+            memory: 500Mi
         volumeMounts:
         - name: app-data
           mountPath: /config
