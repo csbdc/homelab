@@ -1,18 +1,9 @@
-name: Docker
-
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+name: Build "Arr" container Images
 
 on: workflow_dispatch
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: sonarr
-  DLPACKAGE: https://github.com/Sonarr/Sonarr/releases/download/v4.0.17.2953/Sonarr.develop.4.0.17.2953.linux-x64.tar.gz
-  PORT: 8989
-
 
 jobs:
   build:
@@ -20,32 +11,51 @@ jobs:
     permissions:
       contents: read
       packages: write
+
+    strategy:
+      matrix:
+        include:
+          - image_name: sonarr
+            dlpackage: https://github.com/Sonarr/Sonarr/releases/download/v4.0.17.2953/Sonarr.develop.4.0.17.2953.linux-x64.tar.gz
+            port: 8989
+
+          - image_name: radarr
+            dlpackage: https://github.com/Radarr/Radarr/releases/download/v5.2.6/Radarr.master.5.2.6.8376.linux-x64.tar.gz
+            port: 7878
+
+          - image_name: prowlarr
+            dlpackage: https://github.com/Lidarr/Lidarr/releases/download/v2.1.7.4030/Lidarr.master.2.1.7.4030.linux-x64.tar.gz
+            port: 9696
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@f95db51fddba0c2d1ec667646a06c2ce06100226 # v3.0.0
-      - name: Log into registry ${{ env.REGISTRY }}
-        uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log into registry
+        uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Extract Docker metadata
         id: meta
-        uses: docker/metadata-action@96383f45573cb7f253c731d3b3ab81c87ef81934 # v5.0.0
+        uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/csbdc/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/csbdc/${{ matrix.image_name }}
+
       - name: Build and push Docker image
-        id: build-and-push
-        uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
+        uses: docker/build-push-action@v5
         with:
           context: container-images/arr_apps/
           push: true
           build-args: |
-            app=${{ env.IMAGE_NAME }}
-            dlpackage=${{ env.DLPACKAGE }}
-            port=${{ env.PORT }}
+            app=${{ matrix.image_name }}
+            dlpackage=${{ matrix.dlpackage }}
+            port=${{ matrix.port }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
