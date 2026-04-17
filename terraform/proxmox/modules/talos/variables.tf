@@ -1,4 +1,5 @@
 variable "talos_config" {
+  description = "Config map to build Talos cluster."
   type = object({
     cluster_name             = string
     talos_kubernetes_version = string
@@ -9,5 +10,6 @@ variable "talos_config" {
 }
 
 variable "talos_patch" {
+  description = "Talos patch file in yaml format."
   type = string
 }

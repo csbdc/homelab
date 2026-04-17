@@ -1,4 +1,5 @@
 variable "vm_spec" {
+  description = "Configuration of vm to create."
   type = object({
     name          = string
     random_suffix = optional(bool, false)

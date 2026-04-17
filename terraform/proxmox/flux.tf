@@ -12,7 +12,7 @@ resource "tls_private_key" "ssh_key" {
   algorithm = "ED25519"
 }
 
-resource "kubernetes_secret_v1" "git-ssh-flux" {
+resource "kubernetes_secret_v1" "git_ssh_flux" {
   depends_on = [helm_release.fluxcd]
   metadata {
     name      = "git-ssh-flux"
@@ -27,7 +27,7 @@ resource "kubernetes_secret_v1" "git-ssh-flux" {
 }
 
 
-resource "helm_release" "flux2-sync" {
+resource "helm_release" "flux2_sync" {
   depends_on       = [helm_release.fluxcd]
   create_namespace = true
   chart            = "flux2-sync"
