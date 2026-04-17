@@ -1,4 +1,4 @@
-name: scan with KICS and upload SARIF
+name: Scan IaC with KICS
 permissions:
   security-events: write
   contents: read
