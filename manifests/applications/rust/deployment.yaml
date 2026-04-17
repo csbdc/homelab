@@ -16,10 +16,23 @@ spec:
       labels:
         app: rpp
     spec:
+
+      securityContext:
+        fsGroup: 10000
+        runAsGroup: 10000
+        runAsNonRoot: true
+        runAsUser: 10000
+        seccompProfile:
+          type: RuntimeDefault
+        readOnlyRootFilesystem: true
+      automountServiceAccountToken: false
       containers:
       - image: ghcr.io/alexemanuelol/rustplusplus:master
         name: rpp
-        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
         env:
         - name: RPP_DISCORD_CLIENT_ID
           valueFrom:
@@ -40,6 +53,13 @@ spec:
           mountPath: /app/instances
         - name: credentials
           mountPath: /app/credentials
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 250m
+            memory: 250Mi
       volumes:
       - name: credentials
         persistentVolumeClaim:
