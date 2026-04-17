@@ -36,7 +36,13 @@ spec:
           - containerPort: 5055
             name: http
             protocol: TCP
-        resources: {}
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 250m
+            memory: 250Mi
         volumeMounts:
         - name: data
           mountPath: /app/config

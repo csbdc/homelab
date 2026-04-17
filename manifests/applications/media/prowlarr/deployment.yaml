@@ -10,7 +10,8 @@ spec:
   selector:
     matchLabels:
       app: prowlarr
-  strategy: {}
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -53,7 +54,13 @@ spec:
           - containerPort: 9696
             name: http
             protocol: TCP
-        resources: {}
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 250m
+            memory: 250Mi
         volumeMounts:
         - name: data
           mountPath: /config
