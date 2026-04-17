@@ -10,7 +10,7 @@ on: workflow_dispatch
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: sonarr
-  DLPACKAGE: https://services.sonarr.tv/v1/download/main/latest?version=4&os=linux&arch=x86
+  DLPACKAGE: https://github.com/Sonarr/Sonarr/releases/download/v4.0.17.2953/Sonarr.develop.4.0.17.2953.linux-x64.tar.gz
   PORT: 8989
 
 
