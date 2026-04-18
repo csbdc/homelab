@@ -9,3 +9,4 @@ resources:
   - external-dns.yaml
   - longhorn.yaml
   - metrics-server.yaml
+  - cloudnativePG.yaml
