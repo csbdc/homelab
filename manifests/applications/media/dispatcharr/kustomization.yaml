@@ -6,5 +6,7 @@ resources:
   - persistentVolumeClaim.yaml
   - service.yaml
   - configMap.yaml
+  - postgres.yaml
+  - valkey.yaml
   - deployment.yaml
   - ingress.yaml

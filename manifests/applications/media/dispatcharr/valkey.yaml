@@ -7,7 +7,7 @@ spec:
   suspend: false
   install:
     createNamespace: true
-  targetNamespace: valkey-system
+  targetNamespace: media
   interval: 10m
   chart:
     spec:
@@ -17,3 +17,6 @@ spec:
         name: valkey
         namespace: default
       interval: 10m
+  values:
+    nameOverride: dispatcharr-prod-media-valkey
+    
