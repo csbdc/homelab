@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: dispatcharr
-  name: dispatcharr-prod-media-deployment
+  name: dispatcharr-prod-media-web-deployment
   namespace: media
 spec:
   replicas: 1
@@ -17,34 +17,84 @@ spec:
       labels:
         app: dispatcharr
     spec:
-      securityContext:
-        fsGroup: 10000
-        runAsGroup: 10000
-        runAsNonRoot: true
-        runAsUser: 10000
-        seccompProfile:
-          type: RuntimeDefault
-        readOnlyRootFilesystem: true
-      automountServiceAccountToken: false
       containers:
-      - securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop: ["ALL"]
-        image: ghcr.io/dispatcharr/dispatcharr:latest
-        name: dispatcharr
-        envFrom:
-        - configMapRef:
-            name: dispatcharr-prod-media-config
-        ports:
-          - containerPort: 9191
-            name: http
-            protocol: TCP
-        resources: {}
-        volumeMounts:
-        - name: data
-          mountPath: /data
+        - name: web
+          image: ghcr.io/dispatcharr/dispatcharr:latest
+          env:
+            - name: POSTGRES_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: dispatcharr-pg-app
+                  key: host
+            - name: POSTGRES_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: dispatcharr-pg-app
+                  key: port
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: dispatcharr-pg-app
+                  key: dbname
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: dispatcharr-pg-app
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dispatcharr-pg-app
+                  key: password
+          envFrom:
+          - configMapRef:
+              name: dispatcharr-prod-media-web-config
+          ports:
+            - containerPort: 9191
+              name: http
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+            - name: data
+              mountPath: /data
+        - name: celery
+          image: ghcr.io/dispatcharr/dispatcharr:latest
+          command: 
+            - "/app/docker/entrypoint.celery.sh"
+          env:
+            - name: POSTGRES_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: dispatcharr-pg-app
+                  key: host
+            - name: POSTGRES_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: dispatcharr-pg-app
+                  key: port
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: dispatcharr-pg-app
+                  key: dbname
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: dispatcharr-pg-app
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dispatcharr-pg-app
+                  key: password
+          envFrom:
+            - configMapRef:
+                name: dispatcharr-prod-media-celery-config
+          resources: {}
+          volumeMounts:
+            - name: data
+              mountPath: /data
       volumes:
-      - name: data
-        persistentVolumeClaim:
-          claimName: dispatcharr-prod-media-pvc
+        - name: data
+          persistentVolumeClaim:
+            claimName: dispatcharr-prod-media-pvc
