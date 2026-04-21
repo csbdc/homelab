@@ -25,10 +25,10 @@ spec:
       #   readOnlyRootFilesystem: true
       # automountServiceAccountToken: false
       containers:
-      - securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop: ["ALL"]
+      - securityContext: {}
+          # allowPrivilegeEscalation: false
+          # capabilities:
+          #   drop: ["ALL"]
         image: docker.io/linuxserver/qbittorrent
         name: qbittorrent
         ports:

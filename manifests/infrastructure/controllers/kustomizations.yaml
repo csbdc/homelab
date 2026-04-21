@@ -10,4 +10,4 @@ resources:
   - longhorn.yaml
   - metrics-server.yaml
   - cloudnativePG.yaml
-  - redis.yaml
+  - valkey.yaml

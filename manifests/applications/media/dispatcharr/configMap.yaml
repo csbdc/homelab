@@ -8,3 +8,5 @@ data:
   REDIS_HOST: localhost
   CELERY_BROKER_URL: redis://localhost:6379/0
   DISPATCHARR_LOG_LEVEL: info
+  PGID: "10000"
+  PUID: "10000"
