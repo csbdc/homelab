@@ -1,19 +1,19 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: redis
+  name: valkey
   namespace: default
 spec:
   suspend: false
   install:
     createNamespace: true
-  targetNamespace: redis-system
+  targetNamespace: valkey-system
   interval: 10m
   chart:
     spec:
-      chart: redis-enterprise-operator
+      chart: valkey
       sourceRef:
         kind: HelmRepository
-        name: redis
+        name: valkey
         namespace: default
       interval: 10m

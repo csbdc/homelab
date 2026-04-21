@@ -33,11 +33,6 @@ spec:
             drop: ["ALL"]
         image: ghcr.io/csbdc/radarr:main
         name: radarr
-        env:
-          - name: PGID
-            value: "1000"
-          - name: PUID
-            value: "1000"
         livenessProbe:
           httpGet:
             path: /ping

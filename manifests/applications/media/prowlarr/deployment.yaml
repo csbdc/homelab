@@ -45,11 +45,6 @@ spec:
             port: 9696
           initialDelaySeconds: 20
           periodSeconds: 3
-        env:
-          - name: PGID
-            value: "1000"
-          - name: PUID
-            value: "1000"
         ports:
           - containerPort: 9696
             name: http

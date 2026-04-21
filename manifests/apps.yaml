@@ -5,6 +5,8 @@ metadata:
   name: media
   namespace: default
 spec:
+  dependsOn:
+    - name: infra-controllers
   interval: 1m
   timeout: 5m
   sourceRef:

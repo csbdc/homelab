@@ -2,8 +2,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: redis
+  name: valkey
   namespace: default
 spec:
   interval: 1m
-  url: https://helm.redis.io
+  url: https://valkey.io/valkey-helm/
