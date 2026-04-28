@@ -3,6 +3,7 @@ kind: Kustomization
 metadata:
   name: kustomizations
 resources:
+  - cilium.yaml
   - metallb.yaml
   - certmanager.yaml
   - ingress-nginx.yaml
