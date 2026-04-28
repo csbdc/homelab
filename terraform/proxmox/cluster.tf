@@ -19,6 +19,9 @@ module "control_planes" {
     name          = "talos"
     random_suffix = true
     pve_node      = each.key
+    memory = {
+      dedicated = 3072
+    }
     disks = [{
       datastore_id = "local-lvm"
       img          = proxmox_virtual_environment_download_file.talos_img[each.key].id
