@@ -5,6 +5,7 @@ locals {
 resource "proxmox_virtual_environment_download_file" "talos_img" {
   for_each     = toset(local.talos_pve_nodes)
   content_type = "import"
+  overwrite = false
   datastore_id = "local"
   node_name    = each.key
   url          = "https://factory.talos.dev/image/10f9392d7091b30abf573524649756e5bc894f653af525836e9ab0297f301fc2/v1.12.4/metal-amd64.qcow2"
@@ -22,7 +23,7 @@ module "control_planes" {
       datastore_id = "local-lvm"
       img          = proxmox_virtual_environment_download_file.talos_img[each.key].id
       interface    = "scsi0"
-      size         = 45
+      size         = 55
   }] }
 }
 
@@ -51,6 +52,11 @@ locals {
   talos_patch = <<EOF
 machine:
 cluster:
+  network:
+    cni:
+      name: none
+  proxy:
+    disabled: true
 EOF
 }
 
@@ -86,4 +92,9 @@ output "cluster_node_ips" {
 resource "local_file" "kubeconfig" {
   content  = module.talos.kubeconfig
   filename = "/Users/cbxon/.kube/config"
+}
+
+resource "local_file" "talosconfig" {
+  content  = module.talos.talosconfig
+  filename = "/Users/cbxon/.talos/config"
 }

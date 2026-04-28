@@ -24,27 +24,27 @@ spec:
             - name: POSTGRES_HOST
               valueFrom:
                 secretKeyRef:
-                  name: dispatcharr-pg-app
+                  name: dispatcharr-prod-media-pg-app
                   key: host
             - name: POSTGRES_PORT
               valueFrom:
                 secretKeyRef:
-                  name: dispatcharr-pg-app
+                  name: dispatcharr-prod-media-pg-app
                   key: port
             - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
-                  name: dispatcharr-pg-app
+                  name: dispatcharr-prod-media-pg-app
                   key: dbname
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: dispatcharr-pg-app
+                  name: dispatcharr-prod-media-pg-app
                   key: username
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: dispatcharr-pg-app
+                  name: dispatcharr-prod-media-pg-app
                   key: password
           envFrom:
           - configMapRef:
@@ -57,6 +57,31 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: dispatcharr-prod-media-pvc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dispatcharr-celery
+  name: dispatcharr-prod-media-celery-deployment
+  namespace: media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dispatcharr-celery
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: dispatcharr-celery
+    spec:
+      containers:
         - name: celery
           image: ghcr.io/dispatcharr/dispatcharr:latest
           command: 
@@ -65,27 +90,27 @@ spec:
             - name: POSTGRES_HOST
               valueFrom:
                 secretKeyRef:
-                  name: dispatcharr-pg-app
+                  name: dispatcharr-prod-media-pg-app
                   key: host
             - name: POSTGRES_PORT
               valueFrom:
                 secretKeyRef:
-                  name: dispatcharr-pg-app
+                  name: dispatcharr-prod-media-pg-app
                   key: port
             - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
-                  name: dispatcharr-pg-app
+                  name: dispatcharr-prod-media-pg-app
                   key: dbname
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: dispatcharr-pg-app
+                  name: dispatcharr-prod-media-pg-app
                   key: username
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: dispatcharr-pg-app
+                  name: dispatcharr-prod-media-pg-app
                   key: password
           envFrom:
             - configMapRef:
