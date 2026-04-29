@@ -1,0 +1,63 @@
+name: CI Pipeline
+permissions:
+  security-events: write
+  contents: read
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+    tf-fmt:
+        runs-on: ubuntu-latest
+        name: tf-fmt
+        steps:
+        - uses: actions/checkout@v4
+        - uses: hashicorp/setup-terraform@v4
+        - name: Terraform fmt
+          working-directory: terraform
+          run: terraform fmt -check -recursive
+    tflint:
+        runs-on: ubuntu-latest
+        name: tflint
+        steps:
+            - uses: actions/checkout@v4
+            - uses: terraform-linters/setup-tflint@v6
+              with:
+                tflint_version: v0.52.0
+                cache: true
+            - run: tflint --version
+            - run: tflint --init
+              env:
+                GITHUB_TOKEN: ${{ github.token }}
+            - run: tflint --recursive -f compact
+
+    ansible-lint:
+        runs-on: ubuntu-latest
+        name: ansible-lint
+        steps:
+            - uses: actions/checkout@v4
+            - uses: ansible/ansible-lint@main
+
+    sast:
+        runs-on: ubuntu-latest
+        name: kics
+        needs: [tf-fmt,tflint,ansible-lint]
+        if: github.ref == 'refs/heads/main'
+        steps:
+            - uses: actions/checkout@v6.0.2
+            - run: mkdir -p results-dir
+            - name: run kics Scan
+              uses: checkmarx/kics-action@v2.1.20
+              with:
+                path: 'terraform,manifests,ansible,container-images'
+                output_path: results-dir
+                ignore_on_exit: results
+                output_formats: 'sarif'
+            - name: Upload SARIF file
+              uses: github/codeql-action/upload-sarif@v4.35.2
+              with:
+                sarif_file: results-dir/results.sarif
