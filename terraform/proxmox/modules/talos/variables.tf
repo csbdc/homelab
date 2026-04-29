@@ -11,5 +11,5 @@ variable "talos_config" {
 
 variable "talos_patch" {
   description = "Talos patch file in yaml format."
-  type = string
+  type        = string
 }

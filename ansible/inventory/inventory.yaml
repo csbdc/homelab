@@ -2,7 +2,7 @@ all:
   children:
     pve:
       hosts:
-        pve-j0zk2w2: 
+        pve-j0zk2w2:
           ansible_host: 192.168.10.240
         pve-1fdq713:
           ansible_host: 192.168.10.241

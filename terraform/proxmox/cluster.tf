@@ -5,7 +5,7 @@ locals {
 resource "proxmox_virtual_environment_download_file" "talos_img" {
   for_each     = toset(local.talos_pve_nodes)
   content_type = "import"
-  overwrite = false
+  overwrite    = false
   datastore_id = "local"
   node_name    = each.key
   url          = "https://factory.talos.dev/image/10f9392d7091b30abf573524649756e5bc894f653af525836e9ab0297f301fc2/v1.12.4/metal-amd64.qcow2"
@@ -89,7 +89,7 @@ module "talos" {
 
 output "cluster_node_ips" {
   description = "IPs of talos nodes."
-  value = local.nodes
+  value       = local.nodes
 }
 
 resource "local_file" "kubeconfig" {

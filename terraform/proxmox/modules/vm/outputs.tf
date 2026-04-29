@@ -8,5 +8,5 @@ locals {
 
 output "ipv4_address" {
   description = "Ipv4 Address from VM created."
-  value = var.vm_spec.agent != false ? local.ipv4_address[0] : "not_set"
+  value       = var.vm_spec.agent != false ? local.ipv4_address[0] : "not_set"
 }
