@@ -30,8 +30,8 @@ jobs:
         name: ansible-lint
         steps:
             - uses: actions/checkout@v4
-            - run: ansible-lint -f brief
-            
+            - uses: ansible/ansible-lint@main
+
     sast:
         runs-on: ubuntu-latest
         name: kics
