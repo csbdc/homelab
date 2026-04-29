@@ -23,7 +23,7 @@ jobs:
             - run: tflint --init
               env:
                 GITHUB_TOKEN: ${{ github.token }}
-            - run: tflint -f compact  
+            - run: tflint --recursive -f compact  
     kics-job:
         runs-on: ubuntu-latest
         name: kics-action
