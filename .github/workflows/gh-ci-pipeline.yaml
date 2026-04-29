@@ -10,7 +10,7 @@ on:
       - main
 
 jobs:
-    lint:
+    tflint:
         runs-on: ubuntu-latest
         name: tflint
         steps:
@@ -23,11 +23,19 @@ jobs:
             - run: tflint --init
               env:
                 GITHUB_TOKEN: ${{ github.token }}
-            - run: tflint --recursive -f compact  
+            - run: tflint --recursive -f compact
+
+    ansible-lint:
+        runs-on: ubuntu-latest
+        name: tflint
+        steps:
+            - uses: actions/checkout@v4
+            - run: ansible-lint -f brief
+            
     sast:
         runs-on: ubuntu-latest
         name: kics
-        needs: lint
+        needs: [, an]
         steps:
             - uses: actions/checkout@v6.0.2
             - run: mkdir -p results-dir
