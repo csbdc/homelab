@@ -1,7 +1,9 @@
 terraform {
+  required_version = "1.5.7"
   required_providers {
     talos = {
-      source = "siderolabs/talos"
+      source  = "siderolabs/talos"
+      version = "0.11.0"
     }
   }
 }
@@ -17,9 +19,9 @@ resource "talos_cluster_kubeconfig" "this" {
 }
 
 data "talos_client_configuration" "this" {
-  depends_on = [ talos_cluster_kubeconfig.this ]
+  depends_on           = [talos_cluster_kubeconfig.this]
   client_configuration = talos_machine_secrets.this.client_configuration
-  cluster_name = var.talos_config.cluster_name
-  endpoints = [ for k,v in var.talos_config.control_planes : v ]
-  nodes = flatten([[ for k,v in var.talos_config.control_planes : v ],[ for k,v in var.talos_config.workers : v ]])
+  cluster_name         = var.talos_config.cluster_name
+  endpoints            = [for k, v in var.talos_config.control_planes : v]
+  nodes                = flatten([[for k, v in var.talos_config.control_planes : v], [for k, v in var.talos_config.workers : v]])
 }

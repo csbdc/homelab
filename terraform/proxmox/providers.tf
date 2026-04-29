@@ -1,4 +1,5 @@
 terraform {
+  required_version = "1.5.7"
   required_providers {
     proxmox = {
       source  = "bpg/proxmox"
@@ -15,6 +16,14 @@ terraform {
     helm = {
       source  = "hashicorp/helm"
       version = "3.1.1"
+    }
+    tls = {
+      source  = "hashicorp/tls"
+      version = "4.2.1"
+    }
+    local = {
+      source  = "hashicorp/local"
+      version = "2.8.0"
     }
   }
 }

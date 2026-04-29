@@ -40,13 +40,21 @@ jobs:
         name: ansible-lint
         steps:
             - uses: actions/checkout@v4
-            - uses: ansible/ansible-lint@main
+            - uses: actions/setup-python@v5
+              with:
+                python-version: "3.14"
+            - run: pip install ansible-core ansible-lint
+            - run: ansible-lint --version
+            - name: Install collections
+              run: ansible-galaxy collection install -r ansible/requirements.yaml
+            - name: Run ansible-lint
+              run: ansible-lint -q -c ansible/.ansible-lint ansible/
 
     sast:
         runs-on: ubuntu-latest
         name: kics
         needs: [tf-fmt,tflint,ansible-lint]
-        if: github.ref == 'refs/heads/main'
+        if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
         steps:
             - uses: actions/checkout@v6.0.2
             - run: mkdir -p results-dir
