@@ -35,7 +35,7 @@ jobs:
     sast:
         runs-on: ubuntu-latest
         name: kics
-        needs: [, an]
+        needs: [tflint,ansible-lint]
         steps:
             - uses: actions/checkout@v6.0.2
             - run: mkdir -p results-dir
