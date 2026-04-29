@@ -15,6 +15,7 @@ jobs:
         name: tf-fmt
         steps:
         - uses: hashicorp/setup-terraform@v4
+        - run: ls -la
         - name: Terraform fmt
           working-directory: terraform
           run: terraform fmt -check -recursive
