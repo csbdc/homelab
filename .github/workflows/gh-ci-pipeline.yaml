@@ -12,10 +12,11 @@ on:
 jobs:
     tf-fmt:
         runs-on: ubuntu-latest
-        name: tflint
+        name: tf-fmt
         steps:
         - uses: hashicorp/setup-terraform@v4
         - name: Terraform fmt
+          working-directory: terraform
           run: terraform fmt -check -recursive
     tflint:
         runs-on: ubuntu-latest
