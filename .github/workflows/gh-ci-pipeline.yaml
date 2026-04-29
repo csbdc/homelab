@@ -3,7 +3,12 @@ permissions:
   security-events: write
   contents: read
 
-on: [ pull_request, push, workflow_dispatch]
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
 
 jobs:
     tf-fmt:
