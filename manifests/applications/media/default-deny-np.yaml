@@ -11,4 +11,14 @@ spec:
             app.kubernetes.io/name: ingress-nginx
             io.kubernetes.pod.namespace: ingress-nginx
   egress:
-    - {}
+    - toEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace: kube-system
+            k8s-app: kube-dns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: UDP
+          rules:
+            dns:
+              - matchPattern: "*"
