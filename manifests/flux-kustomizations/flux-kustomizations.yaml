@@ -11,7 +11,7 @@ spec:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
-  path: ${flux_environment_path}/namespaces
+  path: /manifests/namespaces
   prune: true
   suspend: false
 ---
@@ -27,7 +27,7 @@ spec:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
-  path: ${flux_environment_path}/helm-repository
+  path: /manifests/helm-repository
   prune: true
   suspend: false
 ---
@@ -46,7 +46,7 @@ spec:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
-  path: ${flux_environment_path}/operators
+  path: /manifests/operators
   prune: true
   suspend: false
 ---
@@ -64,7 +64,7 @@ spec:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
-  path: ${flux_environment_path}/applications/cert-manager
+  path: /manifests/applications/cert-manager
   prune: true
   suspend: false
 ---
@@ -82,7 +82,7 @@ spec:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
-  path: ${flux_environment_path}/applications/metallb
+  path: /manifests/applications/metallb
   prune: true
   suspend: false
 ---
@@ -100,7 +100,7 @@ spec:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
-  path: ${flux_environment_path}/applications/metrics-server
+  path: /manifests/applications/metrics-server
   prune: true
   suspend: false
 ---
@@ -118,7 +118,7 @@ spec:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
-  path: ${flux_environment_path}/applications/nginx-ingress
+  path: /manifests/applications/nginx-ingress
   prune: true
   suspend: false
 ---
@@ -136,6 +136,6 @@ spec:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
-  path: ${flux_environment_path}/applications/media
+  path: /manifests/applications/media
   prune: true
   suspend: false
