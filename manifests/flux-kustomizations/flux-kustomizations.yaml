@@ -13,7 +13,6 @@ spec:
     namespace: flux-system
   path: /manifests/namespaces
   prune: true
-  suspend: false
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -29,7 +28,6 @@ spec:
     namespace: flux-system
   path: /manifests/helm-repository
   prune: true
-  suspend: false
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -48,7 +46,6 @@ spec:
     namespace: flux-system
   path: /manifests/operators
   prune: true
-  suspend: false
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -66,7 +63,6 @@ spec:
     namespace: flux-system
   path: /manifests/applications/cert-manager
   prune: true
-  suspend: false
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -84,7 +80,6 @@ spec:
     namespace: flux-system
   path: /manifests/applications/metallb
   prune: true
-  suspend: false
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -102,7 +97,6 @@ spec:
     namespace: flux-system
   path: /manifests/applications/metrics-server
   prune: true
-  suspend: false
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -120,7 +114,6 @@ spec:
     namespace: flux-system
   path: /manifests/applications/nginx-ingress
   prune: true
-  suspend: false
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -138,4 +131,20 @@ spec:
     namespace: flux-system
   path: /manifests/applications/media
   prune: true
-  suspend: false
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: dispatcharr
+  namespace: default
+spec:
+  dependsOn:
+    - name: nginx-ingress
+  interval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: homelab-github-flux-sync
+    namespace: flux-system
+  path: /manifests/applications/dispatcharr
+  prune: true

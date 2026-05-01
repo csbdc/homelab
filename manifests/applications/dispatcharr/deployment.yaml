@@ -4,8 +4,8 @@ metadata:
   labels:
     app: dispatcharr
     tier: frontend
-  name: dispatcharr-prod-media-web-deployment
-  namespace: media
+  name: dispatcharr-prod-frontend-deployment
+  namespace: dispatcharr
 spec:
   replicas: 1
   selector:
@@ -27,31 +27,31 @@ spec:
             - name: POSTGRES_HOST
               valueFrom:
                 secretKeyRef:
-                  name: dispatcharr-prod-media-pg-app
+                  name: dispatcharr-prod-pg-app
                   key: host
             - name: POSTGRES_PORT
               valueFrom:
                 secretKeyRef:
-                  name: dispatcharr-prod-media-pg-app
+                  name: dispatcharr-prod-pg-app
                   key: port
             - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
-                  name: dispatcharr-prod-media-pg-app
+                  name: dispatcharr-prod-pg-app
                   key: dbname
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: dispatcharr-prod-media-pg-app
+                  name: dispatcharr-prod-pg-app
                   key: username
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: dispatcharr-prod-media-pg-app
+                  name: dispatcharr-prod-pg-app
                   key: password
           envFrom:
           - configMapRef:
-              name: dispatcharr-prod-media-web-config
+              name: dispatcharr-prod-web-config
           ports:
             - containerPort: 9191
               name: http
@@ -63,7 +63,7 @@ spec:
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: dispatcharr-prod-media-pvc
+            claimName: dispatcharr-prod-pvc
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -71,8 +71,8 @@ metadata:
   labels:
     app: dispatcharr
     tier: app
-  name: dispatcharr-prod-media-celery-deployment
-  namespace: media
+  name: dispatcharr-prod-celery-deployment
+  namespace: dispatcharr
 spec:
   replicas: 1
   selector:
@@ -96,31 +96,31 @@ spec:
             - name: POSTGRES_HOST
               valueFrom:
                 secretKeyRef:
-                  name: dispatcharr-prod-media-pg-app
+                  name: dispatcharr-prod-pg-app
                   key: host
             - name: POSTGRES_PORT
               valueFrom:
                 secretKeyRef:
-                  name: dispatcharr-prod-media-pg-app
+                  name: dispatcharr-prod-pg-app
                   key: port
             - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
-                  name: dispatcharr-prod-media-pg-app
+                  name: dispatcharr-prod-pg-app
                   key: dbname
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: dispatcharr-prod-media-pg-app
+                  name: dispatcharr-prod-pg-app
                   key: username
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: dispatcharr-prod-media-pg-app
+                  name: dispatcharr-prod-pg-app
                   key: password
           envFrom:
             - configMapRef:
-                name: dispatcharr-prod-media-celery-config
+                name: dispatcharr-prod-celery-config
           resources: {}
           volumeMounts:
             - name: data
@@ -128,4 +128,4 @@ spec:
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: dispatcharr-prod-media-pvc
+            claimName: dispatcharr-prod-pvc

@@ -4,10 +4,7 @@ metadata:
   name: valkey
   namespace: default
 spec:
-  suspend: false
-  install:
-    createNamespace: true
-  targetNamespace: media
+  targetNamespace: dispatcharr
   interval: 10m
   chart:
     spec:
@@ -18,7 +15,7 @@ spec:
         namespace: default
       interval: 10m
   values:
-    nameOverride: dispatcharr-prod-media-valkey
+    nameOverride: dispatcharr-prod-valkey
     commonLabels:
       app: dispatcharr
       tier: message

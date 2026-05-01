@@ -1,11 +1,10 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: dispatcharr-prod-media-ingress
-  namespace: media
+  name: dispatcharr-prod-ingress
+  namespace: dispatcharr
   labels:
     app: dispatcharr
-    tier: frontend
 spec:
   ingressClassName: nginx
   rules:
@@ -16,6 +15,6 @@ spec:
         path: /
         backend:
           service:
-            name: dispatcharr-prod-media-svc
+            name: dispatcharr-prod-svc
             port:
               number: 9191
