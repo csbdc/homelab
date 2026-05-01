@@ -3,6 +3,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: dispatcharr-prod-media-pvc
   namespace: media
+  labels:
+    app: dispatcharr
 spec:
   accessModes:
     - ReadWriteMany

@@ -19,4 +19,6 @@ spec:
       interval: 10m
   values:
     nameOverride: dispatcharr-prod-media-valkey
-    
+    commonLabels:
+      app: dispatcharr
+      tier: message

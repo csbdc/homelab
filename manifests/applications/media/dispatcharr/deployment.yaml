@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: dispatcharr
+    tier: frontend
   name: dispatcharr-prod-media-web-deployment
   namespace: media
 spec:
@@ -10,12 +11,14 @@ spec:
   selector:
     matchLabels:
       app: dispatcharr
+      tier: frontend
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
         app: dispatcharr
+        tier: frontend
     spec:
       containers:
         - name: web
@@ -66,20 +69,23 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: dispatcharr-celery
+    app: dispatcharr
+    tier: app
   name: dispatcharr-prod-media-celery-deployment
   namespace: media
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dispatcharr-celery
+      app: dispatcharr
+      tier: app
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: dispatcharr-celery
+        app: dispatcharr
+        tier: app
     spec:
       containers:
         - name: celery

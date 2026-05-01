@@ -1,0 +1,141 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: namespaces
+  namespace: default
+spec:
+  interval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: homelab-github-flux-sync
+    namespace: flux-system
+  path: ${flux_environment_path}/namespaces
+  prune: true
+  suspend: false
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: helm-repository
+  namespace: default
+spec:
+  interval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: homelab-github-flux-sync
+    namespace: flux-system
+  path: ${flux_environment_path}/helm-repository
+  prune: true
+  suspend: false
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: operators
+  namespace: default
+spec:
+  dependsOn:
+    - name: helm-repository
+    - name: namespaces
+  interval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: homelab-github-flux-sync
+    namespace: flux-system
+  path: ${flux_environment_path}/operators
+  prune: true
+  suspend: false
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cert-manager
+  namespace: default
+spec:
+  dependsOn:
+    - name: operators
+  interval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: homelab-github-flux-sync
+    namespace: flux-system
+  path: ${flux_environment_path}/applications/cert-manager
+  prune: true
+  suspend: false
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: metallb
+  namespace: default
+spec:
+  dependsOn:
+    - name: operators
+  interval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: homelab-github-flux-sync
+    namespace: flux-system
+  path: ${flux_environment_path}/applications/metallb
+  prune: true
+  suspend: false
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: metrics-server
+  namespace: default
+spec:
+  dependsOn:
+    - name: operators
+  interval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: homelab-github-flux-sync
+    namespace: flux-system
+  path: ${flux_environment_path}/applications/metrics-server
+  prune: true
+  suspend: false
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: nginx-ingress
+  namespace: default
+spec:
+  dependsOn:
+    - name: operators
+  interval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: homelab-github-flux-sync
+    namespace: flux-system
+  path: ${flux_environment_path}/applications/nginx-ingress
+  prune: true
+  suspend: false
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: media
+  namespace: default
+spec:
+  dependsOn:
+    - name: nginx-ingress
+  interval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: homelab-github-flux-sync
+    namespace: flux-system
+  path: ${flux_environment_path}/applications/media
+  prune: true
+  suspend: false

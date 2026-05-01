@@ -3,6 +3,9 @@ kind: Cluster
 metadata:
   name: dispatcharr-prod-media-pg
   namespace: media
+  labels:
+    app: dispatcharr
+    tier: data
 spec:
   instances: 1
   storage:
