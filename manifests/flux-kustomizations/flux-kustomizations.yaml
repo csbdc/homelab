@@ -5,7 +5,7 @@ metadata:
   name: namespaces
   namespace: default
 spec:
-  interval: 1m
+  interval: 30s
   timeout: 5m
   sourceRef:
     kind: GitRepository
@@ -20,7 +20,7 @@ metadata:
   name: helm-repository
   namespace: default
 spec:
-  interval: 1m
+  interval: 30s
   timeout: 5m
   sourceRef:
     kind: GitRepository
@@ -38,7 +38,7 @@ spec:
   dependsOn:
     - name: helm-repository
     - name: namespaces
-  interval: 1m
+  interval: 30s
   timeout: 5m
   sourceRef:
     kind: GitRepository
@@ -55,7 +55,7 @@ metadata:
 spec:
   dependsOn:
     - name: operators
-  interval: 1m
+  interval: 30s
   timeout: 5m
   sourceRef:
     kind: GitRepository
@@ -72,7 +72,7 @@ metadata:
 spec:
   dependsOn:
     - name: operators
-  interval: 1m
+  interval: 30s
   timeout: 5m
   sourceRef:
     kind: GitRepository
@@ -89,7 +89,7 @@ metadata:
 spec:
   dependsOn:
     - name: operators
-  interval: 1m
+  interval: 30s
   timeout: 5m
   sourceRef:
     kind: GitRepository
@@ -106,7 +106,7 @@ metadata:
 spec:
   dependsOn:
     - name: operators
-  interval: 1m
+  interval: 30s
   timeout: 5m
   sourceRef:
     kind: GitRepository
@@ -123,7 +123,7 @@ metadata:
 spec:
   dependsOn:
     - name: nginx-ingress
-  interval: 1m
+  interval: 30s
   timeout: 5m
   sourceRef:
     kind: GitRepository
@@ -140,7 +140,7 @@ metadata:
 spec:
   dependsOn:
     - name: nginx-ingress
-  interval: 1m
+  interval: 30s
   timeout: 5m
   sourceRef:
     kind: GitRepository
