@@ -3,6 +3,9 @@ kind: Ingress
 metadata:
   name: dispatcharr-prod-media-ingress
   namespace: media
+  labels:
+    app: dispatcharr
+    tier: frontend
 spec:
   ingressClassName: nginx
   rules:

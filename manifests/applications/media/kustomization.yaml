@@ -4,7 +4,7 @@ metadata:
   name: kustomizations
 resources:
   - namespace.yaml
-  - default-deny-np.yaml
+  - ciliumNetworkPolicies.yaml
   - dispatcharr
   - jellyfin
   - radarr

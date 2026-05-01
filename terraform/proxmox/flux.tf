@@ -50,7 +50,7 @@ resource "helm_release" "flux2_sync" {
     },
     {
       name  = "kustomization.spec.path"
-      value = "manifests/"
+      value = "manifests/flux-kustomizations"
     }
   ]
 }

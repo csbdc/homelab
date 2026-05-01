@@ -3,9 +3,13 @@ kind: Service
 metadata:
   name: dispatcharr-prod-media-svc
   namespace: media
+  labels:
+    app: dispatcharr
+    tier: frontend
 spec:
   selector:
     app: dispatcharr
+    tier: frontend
   ports:
     - port: 9191
       targetPort: http

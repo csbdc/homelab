@@ -3,6 +3,7 @@ kind: Kustomization
 metadata:
   name: kustomizations
 resources:
+  - ciliumNetworkPolicies.yaml
   - persistentVolumeClaim.yaml
   - service.yaml
   - configMap.yaml
