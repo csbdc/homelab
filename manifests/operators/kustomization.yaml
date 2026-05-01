@@ -3,7 +3,7 @@ kind: Kustomization
 metadata:
   name: kustomization
 resources:
-  - cillium.yaml
+  - cilium.yaml
   - metallb.yaml
   - longhorn.yaml
   - external-dns.yaml
