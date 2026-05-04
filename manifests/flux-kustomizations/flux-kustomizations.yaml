@@ -148,3 +148,20 @@ spec:
     namespace: flux-system
   path: /manifests/applications/dispatcharr
   prune: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: mealie
+  namespace: default
+spec:
+  dependsOn:
+    - name: nginx-ingress
+  interval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: homelab-github-flux-sync
+    namespace: flux-system
+  path: /manifests/applications/mealie
+  prune: true
