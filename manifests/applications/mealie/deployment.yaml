@@ -33,27 +33,27 @@ spec:
           - name: POSTGRES_HOST
             valueFrom:
               secretKeyRef:
-                name: dispatcharr-prod-pg-app
+                name: mealie-prod-pg-app
                 key: host
           - name: POSTGRES_PORT
             valueFrom:
               secretKeyRef:
-                name: dispatcharr-prod-pg-app
+                name: mealie-prod-pg-app
                 key: port
           - name: POSTGRES_DB
             valueFrom:
               secretKeyRef:
-                name: dispatcharr-prod-pg-app
+                name: mealie-prod-pg-app
                 key: dbname
           - name: POSTGRES_USER
             valueFrom:
               secretKeyRef:
-                name: dispatcharr-prod-pg-app
+                name: mealie-prod-pg-app
                 key: username
           - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: dispatcharr-prod-pg-app
+                name: mealie-prod-pg-app
                 key: password
         ports:
           - containerPort: 9000

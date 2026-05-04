@@ -18,3 +18,4 @@ dispatcharr    IN  A    192.168.10.5
 qbittorrent-0    IN  A    192.168.10.5
 qbittorrent-1    IN  A    192.168.10.5
 qbittorrent-2    IN  A    192.168.10.5
+mealie  IN  A   192.168.10.5
