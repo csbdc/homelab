@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mealie
+    tier: frontend
+  name: mealie-prod-frontend-deployment
+  namespace: mealie
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mealie
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mealie
+        tier: frontend
+    spec:
+      containers:
+      - name: mealie
+        image: ghcr.io/mealie-recipes/mealie:nightly
+        env:
+          - name: ALLOW_SIGNUP
+            value: "false"
+          - name: LOG_LEVEL
+            value: "DEBUG"
+          - name: DB_ENGINE
+            value: "postgres"
+          - name: POSTGRES_HOST
+            valueFrom:
+              secretKeyRef:
+                name: dispatcharr-prod-pg-app
+                key: host
+          - name: POSTGRES_PORT
+            valueFrom:
+              secretKeyRef:
+                name: dispatcharr-prod-pg-app
+                key: port
+          - name: POSTGRES_DB
+            valueFrom:
+              secretKeyRef:
+                name: dispatcharr-prod-pg-app
+                key: dbname
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: dispatcharr-prod-pg-app
+                key: username
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: dispatcharr-prod-pg-app
+                key: password
+        ports:
+          - containerPort: 9000
+            name: http
+            protocol: TCP
+        volumeMounts:
+          - name: data
+            mountPath: /app/data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: mealie-prod-pvc

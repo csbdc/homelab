@@ -8,3 +8,5 @@ resources:
   - ingress-nginx.yaml
   - media.yaml
   - dispatcharr.yaml
+  - mealie.yaml
+  
