@@ -30,7 +30,7 @@ spec:
             value: "DEBUG"
           - name: DB_ENGINE
             value: "postgres"
-          - name: POSTGRES_HOST
+          - name: POSTGRES_SERVER
             valueFrom:
               secretKeyRef:
                 name: mealie-prod-pg-app
